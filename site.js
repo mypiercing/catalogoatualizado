@@ -94,6 +94,21 @@ window.addEventListener('DOMContentLoaded', (event) => {
     
     let selectedSize = null;
     
+    let initialViewportHeight = window.innerHeight;
+
+window.addEventListener('resize', function() {
+    let heightDifference = initialViewportHeight - window.innerHeight;
+    let differenceInPercentage = (heightDifference / initialViewportHeight) * 100;
+
+    if (differenceInPercentage > 20) {
+        // A diferença de altura é maior do que 20%, o teclado provavelmente está aberto
+        document.body.classList.add('keyboard-open');
+    } else {
+        // A diferença de altura é menor do que 20%, o teclado provavelmente está fechado
+        document.body.classList.remove('keyboard-open');
+    }
+});
+
     document.addEventListener('click', (event) => {
         if (event.target.classList.contains('measure')) {
             // Remova a classe 'selected' de qualquer botão de medida anteriormente selecionado
