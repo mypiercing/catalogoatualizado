@@ -204,7 +204,8 @@ button.color {
     border-radius: 41px;  
     width: 90%;
     max-width: 100%; /* Defina um valor máximo desejado para evitar que o pop-up fique muito largo em telas grandes */
-    max-height: 90%; 
+    max-height: 90%;
+    overflow: auto;
 }
 
 #popup-close {
