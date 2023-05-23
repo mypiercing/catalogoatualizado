@@ -14,7 +14,7 @@ body {
     margin: 15px 0 40px;
     padding: 15px 20px;
     background-color: #ffffff96;
-    border-radius: 20px;
+    border-radius: 30px;
     min-height: 340px;
     
 }
@@ -29,7 +29,7 @@ body {
     width: 350px;
     height: auto;
     margin-bottom: 15px;
-    border-radius: 60px;
+    border-radius: 20px;
 }
 
 .product h3 {
@@ -47,16 +47,13 @@ body {
     /* position: absolute; */
     /* right: 40px; */
     justify-content: center;
-    min-width: 120px;
-    margin-right: 10px;
 }
 
 .colors .color {
-    padding: 40px 12px;
     background-color: #444;
     border: none;
     color: #ddd;
-    border-radius: 5px;
+    border-radius: 20px;
     cursor: pointer;
     margin: 10px;
     border: 2px solid #979797;
@@ -104,8 +101,6 @@ body {
 
 #popup-add {
     display: block;
-    margin-left: auto;
-    font-size: 60px;
     background-image: linear-gradient(-180deg, #00a6ad 0%, #00858b 100%);
     border-radius: 0.5rem;
     box-sizing: border-box;
@@ -115,6 +110,7 @@ body {
     border: 1px;
     cursor: pointer;
     border: 2px solid #979797;
+        margin-left: auto;
 
   }
 #welcomePopup {
@@ -167,7 +163,7 @@ body {
 button {
     margin: 10px;
     padding: 10px 20px;
-    font-size: 60px;
+    font-size: 40px;
     background-image: linear-gradient(-180deg, #f7f7f7 0%, #ededed 100%);
     border-radius: .5rem;
     box-sizing: border-box;
@@ -180,13 +176,11 @@ button {
 
 button.color {
     background-image: linear-gradient(-180deg, #f7f7f7 0%, #ededed 100%);
-        border-radius: .5rem;
         box-sizing: border-box;
         color: #000000;
         display: flex;
-        font-size: 40px;
         justify-content: center;
-        padding: 1rem 1.75rem;
+        padding: 28px 15px;;
         text-decoration: none;
         width: 100%;
         border: 0;
@@ -194,36 +188,35 @@ button.color {
         user-select: none;
         -webkit-user-select: none;
         touch-action: manipulation;
-        border-radius: 10px;
+        align-items: center;
       }
 
 
 #popup {
-    position: absolute;
-    top: 50%;
+    position: fixed;
+    top: 35%;
     left: 50%;
     transform: translate(-50%, -50%);
     padding: 20px;
     background-color: #efffff;
-    border: 1px solid black;
+    border: 1px solid #6c6c6c;
     z-index: 100;
+    border-radius: 41px;  
     width: 90%;
     max-width: 100%; /* Defina um valor máximo desejado para evitar que o pop-up fique muito largo em telas grandes */
-    max-height: 90%;    
+    max-height: 90%; 
 }
 
 #popup-close {
     position: absolute;
-    top: 10px;
+        top: 10px;
     right: 10px;
-    height: 90px;
-    font-size: 50px;
     font-weight: bold;
     background-image: linear-gradient(-180deg, #00a6ad 0%, #00858b 100%);
     border-radius: 0.5rem;
     box-sizing: border-box;
     color: white;
-    padding: 1rem 1.75rem;
+    padding: 20px;
     text-decoration: none;
     border: 1px;
     cursor: pointer;
@@ -256,28 +249,19 @@ header h1 {
 button.color[data-color="Natural"] {
     background-color: #fff;
     color: #000;
-    border-radius: 22px;
-    height: 112px;
-    align-items: center;
-    width: 150px;
+
 }
 
 button.color[data-color="Gold"] {
     background-image: linear-gradient(-180deg, #fff2b3 0%, #ffed92 100%);
     color: #000;
-    border-radius: 22px;
-    height: 112px;
-    align-items: center;
-    width: 150px;
+
 }
 
 button.color[data-color="Black"] {
     background-image: linear-gradient(-180deg, #838383 0%, #444444 100%);
     color: #ffffff;
-    border-radius: 22px;
-    height: 112px;
-    align-items: center;
-    width: 150px;
+
 }
 button.color:focus {
     background-color: darkgray;
@@ -301,8 +285,8 @@ button.color:focus:active {
     color: #000;
 }
 #popup h2 {
-    color: #000;
-    margin-top: 35px;
+    color: #464646;
+    margin-top: 5px;
 }
 
 .measure {
@@ -318,7 +302,7 @@ button.color:focus:active {
     height: 50px;
     margin-left: 10px;
     padding: 5px;
-    border: 2px solid #000000;
+    border: 2px solid #a1a1a1;
     border-radius: 5px;
     margin: 8px;
 }
@@ -333,13 +317,8 @@ button.color:focus:active {
     max-width: 250px;
 }
 
-#popup .measure {
-    font-size: 40px;
-}
-#popup .popup-sizes .size h4 {
-    font-size: 40px; /* Altere o valor para o tamanho de fonte desejado */
-    margin-bottom: 20px;
-}
+
+
 
 .measure {
     margin-bottom: 10px;
@@ -379,9 +358,7 @@ button.color:focus:active {
         background-color: green;
     }
     
-    .measure-quantity {
-        height: 50px; /* Aumente o tamanho do campo de quantidade */
-    }
+
 }
 .measure-container {
     display: flex;
@@ -407,12 +384,7 @@ button.color:focus:active {
     height: 160px;
 }
 
-#popup-product-image {
-    width: 230px;  /* ajuste a largura da imagem */
-    height: 230px; /* ajuste a altura da imagem */
-    object-fit: cover; /* manter a proporção da imagem enquanto preenche o espaço designado */
-    margin-bottom: 20px; /* espaço abaixo da imagem */
-}
+
 .popup-header {
     display: flex;
     align-items: center;
@@ -446,9 +418,7 @@ button.color:focus:active {
     font-weight: bold;
     margin: 0;
 }
-.popup-color {
-    font-size: 40px;
-}
+
 #cart div {
     margin-bottom: 10px;  
 }
@@ -514,7 +484,7 @@ header {
 }
 
 header img {
-    width: 400px; /* Ajuste o tamanho do logo */
+    width: 570px; /* Ajuste o tamanho do logo */
     height: auto;
 }
 #popup-logo {
@@ -523,7 +493,8 @@ header img {
     display: block;
     margin: 0 auto; /* Centraliza o logo horizontalmente */
 }
-#popup, #welcomePopup {
+
+#welcomePopup {
     position: fixed; 
     top: 50%;
     left: 50%;
@@ -533,25 +504,114 @@ header img {
 .argola-segmento .sizes[data-color="Natural"] {
     max-width: 40%;
 }
+#popup-product-image {
+    width: 230px;  /* ajuste a largura da imagem */
+    height: 230px; /* ajuste a altura da imagem */
+    object-fit: cover; /* manter a proporção da imagem enquanto preenche o espaço designado */
+    margin-bottom: 20px; /* espaço abaixo da imagem */
+}
+@media (max-width: 678px) {
 
+    .popup-color {
+        font-size: 40px;
+    }
+    #popup-close {
+        height: 90px;
+        font-size: 50px;
+    }
+    .measure-quantity {
+        width: 90px;
+        height: 40px;}
+
+        #popup .measure {
+            font-size: 40px;
+        }
+        #popup-add {
+            font-size: 60px;
+            }
+
+            #popup .popup-sizes .size h4 {
+                font-size: 40px; /* Altere o valor para o tamanho de fonte desejado */
+                margin-bottom: 20px;
+            }
+            button.color {
+                width: 150px;
+                height: 80px;
+                width: 112px;
+                font-size: 30px;
+              }
+              .colors .color {
+                padding: 40px 12px;
+            }
+            .colors {
+                justify-content: center;
+                min-width: 120px;
+                margin-right: 10px;
+            }
+           
+}
 @media (min-width: 1080px) {
-
+    .product {
+        padding: 15px 10px;
+        margin: 15px 0 10px;
+}
+    .sizes .size {
+        margin-right: -160px;
+    }
+    .colors {
+        margin-right: 0px;
+    }
+    .colors .color {
+            margin: 3px 0;
+        }
+    
+    .product-details {
+        margin-left: 15px;
+    }
+    #popup {
+        position: fixed;
+        top: 50%;
+    }
+    #productList h2 {
+        margin: 10px 0px;
+    }
+    button.color {
+            width: 110px;
+            height: 55px;
+            width: 80px;
+            font-size: 18px;
+          }
+    .product img {
+        width: 150px;
+    }
+    .product-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr; /* Isso cria duas colunas iguais */
+        gap: 0px; /* Espaço entre os itens de grade */
+      }
+    #popup {
+        max-width: 45%; /* Defina um valor máximo desejado para evitar que o pop-up fique muito largo em telas grandes */
+        max-height: 90%; 
+    } 
 .popup-color {
     font-size: 20px;
 }
 #popup-close {
-    height: 30px;
-    width: 30px;
+    height: 30px!important;
+    width: 30px!important;
     font-size: 20px;
 }
 .measure-quantity {
-    width: 57px;
-    height: 24px;
+    
+    width: 50px;
+    height: 20px;
 }
 #popup .measure {
     font-size: 16px;
+    margin-bottom: 0px;
 }
 #popup-add {
+    margin: 0px;
     font-size: 25px;
     }
 #popup-product-image {
@@ -576,37 +636,24 @@ header img {
   }
 
   .icons .insta-container img {
-    width: 50px;
+    width: 40px;
   }
   .icons .whatsapp-container img {
-    width: 50px;
+    width: 40px;
   }
-  body {
-    font-size: 20px;
-}
+
 .product h3 {
-    font-size: 25px;
+    font-size: 18px;
+    margin-bottom: 10px;
 }
-button.color {
-    font-size: 30px;
+.productlist {
+    margin: 100px;
 }
-button.color[data-color="Natural"] {
-    height: 80px;
-    width: 112px;
-}
-button.color[data-color="Gold"] {
-    height: 80px;
-    width: 112px;
-}
-button.color[data-color="Black"] {
-    height: 80px;
-    width: 112px;
+.measure {
+    margin-bottom: 4px;
 }
 .product img {
-    width: 240px;
-}
-.product {
-    min-height: 230px;
+    width: 150px;
 }
 .product {
     max-width: 90%;
@@ -634,30 +681,30 @@ header img {
 .popup-product-name {
     font-size: 25px;
 }
-#popup .measure {
-    font-size: 30px;
-}
 #popup-close {
-    height: 60px;
-    font-size: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 #popup input[type="number"] {
     font-size: 35px;
 }
-.measure-quantity {
-    width: 90px;
-    height: 40px;}
-    
-#popup-product-image {
-    width: 200px;
-    height: 200px;
+
+.popup-sizes .size {
+    padding: 0px 15px;
 }
+
 #popup .popup-sizes .size h4 {
-    font-size: 30px;
-    margin-top: 10px;
+    font-size: 20px;
+    margin-top: 5px;
+    margin-bottom: 5px;
 }
 #popup h2 {
     margin-top: 5px;
+    font-size: 20px;
+}
+#popup-product-image {
+    margin-bottom: 10px;
 }
 #popup .popup-sizes {
     padding-bottom: 10px;
@@ -665,4 +712,30 @@ header img {
 .measure-quantity {
     margin: 5px;
 }
+body {
+    font-size: 14px;
+}
+.product {
+    min-height: 150px;
+}
+#purchaseSummary p {
+    font-size: 15px;
+}
+button {
+    font-size: 20px;
+}
+#copyButton, #whatsappButton {
+    font-size: 25px;
+    padding: 0 20px 0;
+    height: 55px;
+}
+
+}
+.popup-sizes .size .sizes2 {
+    /* display: flex; */
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+.popup-sizes .size .sizes2 .measure-container {
+    padding: 0 30px;
 }
