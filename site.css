@@ -194,7 +194,7 @@ button.color {
 
 #popup {
     position: fixed;
-    top: 50%;
+    top: 60%;
     left: 50%;
     transform: translate(-50%, -50%);
     padding: 20px;
@@ -241,7 +241,7 @@ header h1 {
     text-align: center;
 }
 
-#productList h2,
+
 #purchaseSummary h2 {
     color: #005e5e;
     margin: 20px 40px;
@@ -286,8 +286,9 @@ button.color:focus:active {
     color: #000;
 }
 #popup h2 {
-    color: #464646;
-    margin-top: 5px;
+    color: #484848;
+    margin-top: 60px;
+    font-size: 30px;
 }
 
 .measure {
@@ -415,7 +416,7 @@ button.color:focus:active {
     margin: 5px;
 }
 .popup-product-name {
-    font-size: 50px;
+    font-size: 35px;
     font-weight: bold;
     margin: 0;
 }
@@ -512,6 +513,14 @@ header img {
     margin-bottom: 20px; /* espaço abaixo da imagem */
 }
 @media (max-width: 678px) {
+    #popup h2 {
+        margin: 0px;
+        margin-top: 5px;
+        font-size: 15px!important;
+    }
+    #popup-text .h2 {
+        font-size: 15px!important;
+    }
 #popup {
     margin: 300px 0!important;
 }
@@ -551,7 +560,12 @@ header img {
                 min-width: 120px;
                 margin-right: 10px;
             }
-           
+            #productList h2 {
+                font-size: 15px;
+            }
+            #popup .popup-sizes {
+                padding-bottom: 25px;
+            }
 }
 @media (min-width: 1080px) {
     .product {
@@ -703,8 +717,9 @@ header img {
     margin-bottom: 5px;
 }
 #popup h2 {
+    margin: 0px!important;
     margin-top: 5px;
-    font-size: 20px;
+    font-size: 15px;
 }
 #popup-product-image {
     margin-bottom: 10px;
