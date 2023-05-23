@@ -326,7 +326,6 @@ button.color:focus:active {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
-    max-width: 90%;
     padding-bottom: 50px;
 }
 #popup .popup-sizes .sizes {
