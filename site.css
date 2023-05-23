@@ -204,7 +204,7 @@ button.color {
     border-radius: 41px;  
     width: 90%;
     max-width: 100%; /* Defina um valor máximo desejado para evitar que o pop-up fique muito largo em telas grandes */
-    max-height: 90%;
+    /*max-height: 90%;*/
     overflow: auto;
 }
 
@@ -512,7 +512,9 @@ header img {
     margin-bottom: 20px; /* espaço abaixo da imagem */
 }
 @media (max-width: 678px) {
-
+#popup {
+    margin: 300px 0!important;
+}
     .popup-color {
         font-size: 40px;
     }
@@ -592,7 +594,7 @@ header img {
       }
     #popup {
         max-width: 45%; /* Defina um valor máximo desejado para evitar que o pop-up fique muito largo em telas grandes */
-        max-height: 90%; 
+        /*max-height: 90%; */
     } 
 .popup-color {
     font-size: 20px;
