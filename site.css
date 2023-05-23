@@ -192,21 +192,22 @@ button.color {
       }
 
 
-#popup {
-    position: fixed;
-    top: 40%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    padding: 20px;
-    background-color: #efffff;
-    border: 1px solid #6c6c6c;
-    z-index: 100;
-    border-radius: 41px;  
-    width: 90%;
-    max-width: 100%; /* Defina um valor máximo desejado para evitar que o pop-up fique muito largo em telas grandes */
-    /*max-height: 90%;*/
-    overflow: auto;
-}
+      #popup {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        padding: 20px;
+        background-color: #efffff;
+        border: 1px solid #6c6c6c;
+        z-index: 100;
+        border-radius: 41px;
+        width: 90%;
+        height: auto; /* 60% da altura do viewport */
+        max-width: 100%;
+        box-sizing: border-box; /* inclui padding e borda na altura total */
+        overflow-y: auto; /* permite rolagem vertical se necessário */
+    }
 
 #popup-close {
     position: absolute;
@@ -217,7 +218,7 @@ button.color {
     border-radius: 0.5rem;
     box-sizing: border-box;
     color: white;
-    padding: 20px;
+    padding: 15px 25px;
     text-decoration: none;
     border: 1px;
     cursor: pointer;
@@ -312,7 +313,6 @@ button.color:focus:active {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
-    padding-bottom: 50px;
 }
 #popup .popup-sizes .sizes {
     width: 100%; /* ajuste este valor conforme necessário */
@@ -544,7 +544,7 @@ header img {
 
             #popup .popup-sizes .size h4 {
                 font-size: 40px; /* Altere o valor para o tamanho de fonte desejado */
-                margin-bottom: 20px;
+                margin-bottom: 0px!important;
             }
             button.color {
                 width: 150px;
@@ -564,9 +564,14 @@ header img {
                 font-size: 15px;
             }
             #popup .popup-sizes {
-                padding-bottom: 25px;
+                padding-bottom: 5px;
             }
-}
+            #popup .popup-sizes .size h4 {
+                font-size: 20px;
+                margin-top: 5px;
+                margin-bottom: 5px;
+            }
+        }
 @media (min-width: 1080px) {
     .product {
         padding: 15px 10px;
