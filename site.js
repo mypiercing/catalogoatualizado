@@ -123,7 +123,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
             var quantity = parseInt(measures[i].nextElementSibling.value, 10);
             if (quantity > 0) {
                 var measure = measures[i].innerText;
-                var size = measures[i].parentNode.parentNode.querySelector('h4').innerText;
+                var size = measures[i].closest('.size').querySelector('h4').innerText;
+
     
                 var cart = document.getElementById('cart');
                 var cartItem = document.createElement('p');
