@@ -535,6 +535,35 @@ header img {
 }
 
 @media (min-width: 1080px) {
+
+.popup-color {
+    font-size: 20px;
+}
+#popup-close {
+    height: 30px;
+    width: 30px;
+    font-size: 20px;
+}
+.measure-quantity {
+    width: 57px;
+    height: 24px;
+}
+#popup .measure {
+    font-size: 16px;
+}
+#popup-add {
+    font-size: 25px;
+    }
+#popup-product-image {
+    width: 135px;
+    height: 135px;
+}
+.size {
+    padding-right: 30px;
+    }
+#popup .popup-sizes {
+    justify-content: flex-start;
+}
     #popup-logo {
         width: 20%;
     }
