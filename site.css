@@ -203,7 +203,7 @@ button.color {
         z-index: 100;
         border-radius: 41px;
         width: 90%;
-        height: 50vh; /* 60% da altura do viewport */
+
         max-width: 100%;
         box-sizing: border-box; /* inclui padding e borda na altura total */
         overflow-y: auto; /* permite rolagem vertical se necessário */
@@ -512,7 +512,16 @@ header img {
     object-fit: cover; /* manter a proporção da imagem enquanto preenche o espaço designado */
     margin-bottom: 20px; /* espaço abaixo da imagem */
 }
+
+body.keyboard-open #popup {
+    height: 100vh; /* 60% da altura do viewport */
+}
+
 @media (max-width: 678px) {
+
+
+
+    
     #popup h2 {
         margin: 0px;
         margin-top: 5px;
