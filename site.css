@@ -724,7 +724,7 @@ header img {
     align-items: center;
 }
 #popup input[type="number"] {
-    font-size: 35px;
+    font-size: 20px;
 }
 
 .popup-sizes .size {
@@ -757,7 +757,7 @@ body {
     min-height: 150px;
 }
 #purchaseSummary p {
-    font-size: 15px;
+    font-size: 20px;
 }
 button {
     font-size: 20px;
