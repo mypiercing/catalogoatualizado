@@ -38,7 +38,21 @@ window.addEventListener('DOMContentLoaded', (event) => {
         document.getElementById('welcomePopup').style.display = 'none';
         document.body.style.overflow = '';
     });
-    
+    // Recupera itens do carrinho do localStorage
+    let storedCart = JSON.parse(localStorage.getItem('cart') || "[]");
+    if (storedCart.length > 0) {
+        let cart = document.getElementById('cart');
+        for (let cartItemHTML of storedCart) {
+            let tempDiv = document.createElement('div');
+            tempDiv.innerHTML = cartItemHTML;
+            let cartItem = tempDiv.firstChild;
+
+            let deleteButton = cartItem.querySelector('button');
+            deleteButton.addEventListener('click', removeFromCart);
+
+            cart.appendChild(cartItem);
+        }
+    }
     
         // Resto do código...
     });
@@ -164,6 +178,16 @@ function addToCartFromPopup() {
             cartItem.appendChild(deleteButton);
             cart.appendChild(cartItem);
 
+             // Atualizar carrinho no localStorage
+             let storedCart = JSON.parse(localStorage.getItem('cart') || "[]");
+             storedCart.push(cartItem.outerHTML);
+             localStorage.setItem('cart', JSON.stringify(storedCart));
+ 
+             var totalElement = document.getElementById('total');
+             var total = parseFloat(totalElement.innerText);
+             total += price * quantity;
+             totalElement.innerText = total.toFixed(2);
+
             var totalElement = document.getElementById('total');
             var total = parseFloat(totalElement.innerText);
             total += price * quantity;
@@ -190,7 +214,6 @@ function addToCartFromPopup() {
     // Fechar o popup após adicionar o item ao carrinho
     closePopup();
     // Resetar o campo de quantidade para 1
-    document.querySelector('.popup-quantity').value = 1;
 }
 
     
