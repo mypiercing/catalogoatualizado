@@ -517,7 +517,7 @@ body.keyboard-open #popup {
     height: 100vh; /* 60% da altura do viewport */
 }
 
-@media (max-width: 767px) {
+@media (max-width: 678px) {
 
 
 
@@ -581,7 +581,7 @@ body.keyboard-open #popup {
                 margin-bottom: 5px;
             }
         }
-        @media (min-width: 768px) {
+        @media (min-width: 990px) {
     .product {
         padding: 15px 10px;
         margin: 15px 0 10px;
