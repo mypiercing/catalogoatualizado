@@ -198,7 +198,7 @@ function addToCartFromPopup() {
             
             addedDiv.style.position = 'absolute';
             addedDiv.style.top = '0';
-            addedDiv.style.left = '0';
+            addedDiv.style.left = '10';
             addedDiv.style.color = 'white';
             addedDiv.style.padding = '5px';
             addedDiv.style.zIndex = '100';
