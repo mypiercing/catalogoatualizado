@@ -100,7 +100,7 @@ window.addEventListener('resize', function() {
     let heightDifference = initialViewportHeight - window.innerHeight;
     let differenceInPercentage = (heightDifference / initialViewportHeight) * 100;
 
-    if (differenceInPercentage > 10) {
+    if (differenceInPercentage > 20) {
         // A diferença de altura é maior do que 20%, o teclado provavelmente está aberto
         document.body.classList.add('keyboard-open');
     } else {
