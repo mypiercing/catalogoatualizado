@@ -57,7 +57,7 @@ body {
     border-radius: 20px;
     cursor: pointer;
     margin: 10px;
-    border: 2px solid #979797;
+    border: 1px solid #979797;
 }
 
 
@@ -522,6 +522,35 @@ header img {
 body.keyboard-open #popup {
     height: 100vh; /* 60% da altura do viewport */
 }
+footer {
+    background-color: #558c8f;
+    color: white;
+    padding: 50px;
+    display: flex;
+    height: 200px;
+    align-items: center;
+    font-size: 38px;
+    justify-content: flex-start;
+}
+
+.contact-info div {
+    display: flex;
+    align-items: center;
+}
+
+.contact-info img {
+    margin-right: 10px;
+    height: 70px;
+    width: 70px;
+}
+
+.contact-info p {
+    margin: 0;
+}
+.no-underline {
+    text-decoration: none;
+    color: white;
+}
 
 @media (max-width: 678px) {
 
@@ -784,4 +813,20 @@ button {
   border-radius: 5px;
   margin-top: 20px;
 }
-        }
+.contact-info p {
+    font-size: 15px;
+}
+.contact-info img {
+    margin-right: 10px;
+    height: 30px;
+    width: 30px;
+}
+footer {
+    width: 100%;
+    padding: 10px;
+    height: 100px;
+    justify-content: center;
+}
+}
+        
+
