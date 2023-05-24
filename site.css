@@ -71,7 +71,7 @@ body {
     align-items: center;
     max-width: 40%;
     justify-content: space-between;
-
+       align-items: flex-start;
 }
 .sizes .size {
     display: flex;
@@ -362,11 +362,16 @@ button.color:focus:active {
     
 
 }
-.measure-container {
+#popup .measure-container {
     display: flex;
     align-items: center;
     justify-content: flex-end;
 
+}
+.product-details .measure-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
 }
 #copyButton {
     margin-left: 40px
