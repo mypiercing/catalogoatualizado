@@ -615,6 +615,9 @@ footer {
                 margin-top: 5px;
                 margin-bottom: 5px;
             }
+            .added-banner {
+                left: 10px!important;
+            }
         }
         @media (min-width: 990px) {
     .product {
