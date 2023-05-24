@@ -799,20 +799,12 @@ button {
 .added-banner {
     left: 10px!important;
 }
-.popup-sizes .size .sizes2 {
-    /* display: flex; */
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-}
+
 .popup-sizes .size .sizes2 .measure-container {
     padding: 0 30px;
 }
 
-.product div.added-banner {
-  background:  rgb(13 178 185);
-  border-radius: 5px;
-  margin-top: 20px;
-}
+
 .contact-info p {
     font-size: 15px;
 }
@@ -828,5 +820,14 @@ footer {
     justify-content: center;
 }
 }
-        
+.product div.added-banner {
+    background:  rgb(13 178 185);
+    border-radius: 5px;
+    margin-top: 20px;
+  }
 
+.popup-sizes .size .sizes2 {
+    /* display: flex; */
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
