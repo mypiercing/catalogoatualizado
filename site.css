@@ -70,7 +70,7 @@ body {
     display: flex;
     flex-direction: row;
     align-items: center;
-    max-width: 40%;
+    max-width: 30%;
     justify-content: space-between;
        align-items: flex-start;
 }
@@ -510,7 +510,7 @@ header img {
     /* demais propriedades */
 }
 .argola-segmento .sizes[data-color="Natural"] {
-    max-width: 40%;
+    max-width: 30%;
 }
 #popup-product-image {
     width: 230px;  /* ajuste a largura da imagem */
@@ -554,9 +554,9 @@ footer {
 
 @media (max-width: 678px) {
 
-
-
-    
+    .product-details {
+        margin-left: 25px;
+    }
     #popup h2 {
         margin: 0px;
         margin-top: 5px;
@@ -819,7 +819,11 @@ footer {
     height: 100px;
     justify-content: center;
 }
+
+.sizes[data-color="Natural"] {
+    max-width: 40%;
 }
+        }
 .product div.added-banner {
     background:  rgb(13 178 185);
     border-radius: 5px;
@@ -830,4 +834,7 @@ footer {
     /* display: flex; */
     display: grid;
     grid-template-columns: 1fr 1fr;
+}
+#cart p button {
+    color: rgb(0 145 151);
 }
