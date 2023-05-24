@@ -40,6 +40,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
     });
     // Recupera itens do carrinho do localStorage
     let storedCart = JSON.parse(localStorage.getItem('cart') || "[]");
+    let total = 0;
     if (storedCart.length > 0) {
         let cart = document.getElementById('cart');
         for (let cartItemHTML of storedCart) {
@@ -51,11 +52,20 @@ window.addEventListener('DOMContentLoaded', (event) => {
             deleteButton.addEventListener('click', removeFromCart);
 
             cart.appendChild(cartItem);
+            
+            // Adiciona o preço do item ao total
+            let priceElement = cartItem.querySelector('.product-info > span');
+            let priceAndQuantity = priceElement.innerText.match(/€(\d+(\.\d{1,2})?) \* (\d+) unid = €(\d+(\.\d{1,2})?)/);
+            let itemTotal = parseFloat(priceAndQuantity[4]);
+            total += itemTotal;
         }
+        
+        var totalElement = document.getElementById('total');
+        totalElement.innerText = total.toFixed(2);
     }
-    
-        // Resto do código...
-    });
+
+    // ... restante do código
+});
     
     
     
