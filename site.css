@@ -203,7 +203,7 @@ button.color {
         z-index: 100;
         border-radius: 41px;
         width: 90%;
-
+        max-height: 100%;
         max-width: 100%;
         box-sizing: border-box; /* inclui padding e borda na altura total */
         overflow-y: auto; /* permite rolagem vertical se necessário */
