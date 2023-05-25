@@ -296,7 +296,28 @@ function addToCartFromPopup() {
         tempInput.select();
         document.execCommand('copy');
         document.body.removeChild(tempInput);
+    // Mostra o texto "Copiado" por 3 segundos
+    var copiedText = document.getElementById('copiedText');
+    copiedText.innerText = "Copiado!";
+    copiedText.style.visibility = "visible";
+    
+    setTimeout(function() {
+        copiedText.style.visibility = "hidden";
+    }, 3000);
+});
+
+    document.getElementById('clearCartButton').addEventListener('click', function() {
+        if (confirm("Você deseja remover todos os produtos do carrinho?")) {
+            var cart = document.getElementById('cart');
+            while (cart.firstChild) {
+                cart.firstChild.remove();
+            }
+            document.getElementById('total').innerText = '0';
+            // Não esqueça de limpar o armazenamento local também
+            localStorage.removeItem('cartItems');
+        }
     });
+    
     
     
     
