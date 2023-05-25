@@ -103,7 +103,7 @@ body {
 #popup-add {
     display: block;
     background-image: linear-gradient(-180deg, #00a6ad 0%, #00858b 100%);
-    border-radius: 0.5rem;
+    border-radius: 20px;
     box-sizing: border-box;
     color: white;
     padding: 1rem 1.75rem;
@@ -124,7 +124,7 @@ body {
     justify-content: center;
     align-items: center;
     background-color: #dffafa;
-    color: #303030
+    color: #303030;
     z-index: 1000;
     padding: 10px;
     font-size: 30px;
@@ -276,12 +276,13 @@ button.color:focus:active {
 }
 #total {
     color: #000000;
+    font-size: 45px;
 }
 
 #purchaseSummary p {
     color: #000000;
     margin: 30px 0;
-    font-size: 35px;
+    font-size: 33px;
 }
 
 .sizes h4 {
@@ -307,7 +308,7 @@ button.color:focus:active {
     margin-left: 10px;
     padding: 5px;
     border: 2px solid #a1a1a1;
-    border-radius: 5px;
+    border-radius: 10px;
     margin: 8px;
 }
 #popup .popup-sizes {
@@ -383,7 +384,7 @@ button.color:focus:active {
     border-radius: 2.5rem;
     box-sizing: border-box;
     color: white;
-    padding: 0 100px 0;
+    padding: 0 80px 0;
     text-decoration: none;
     border: 1px;
     cursor: pointer;
@@ -454,8 +455,9 @@ button.color:focus:active {
     margin-left: auto;
     background-color: #000000;
     color: rgb(0, 0, 0);
-    padding: 5px 10px;
+    padding: 5px 11px;
     cursor: pointer;
+    border: 1px solid #d5d5d5;
 }
 header {
     display: flex;
@@ -523,7 +525,7 @@ body.keyboard-open #popup {
     height: 100vh; /* 60% da altura do viewport */
 }
 footer {
-    background-color: #558c8f;
+    background-color: #e5ffff;
     color: white;
     padding: 50px;
     display: flex;
@@ -531,27 +533,109 @@ footer {
     align-items: center;
     font-size: 38px;
     justify-content: flex-start;
+    border-top: 1px solid #bbbbbb;
 }
 
 .contact-info div {
     display: flex;
     align-items: center;
+        margin-bottom: 10px;
 }
 
 .contact-info img {
-    margin-right: 10px;
     height: 70px;
     width: 70px;
 }
 
 .contact-info p {
     margin: 0;
+    color: black;
+    margin-left: 20px;
 }
 .no-underline {
     text-decoration: none;
     color: white;
 }
+.product div.added-banner {
+    background:  rgb(13 178 185);
+    border-radius: 5px;
+    margin-top: 20px;
+  }
 
+  .popup-sizes .size .sizes2 {
+    /* display: flex; */
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 80px;
+}
+#cart p button {
+    color: rgb(0 145 151);
+}
+#purchaseSummary {
+    /* adicione seus estilos existentes aqui */
+}
+
+#buttonContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    position: relative;  /* Adicione isso para posicionar o #copiedText em relação a este container */
+}
+
+#buttonContainer button {
+    flex-grow: 1;
+    margin: 0 10px;
+}
+
+#copiedText {
+    position: absolute;
+    bottom: 175px; /* Adicione isso para mover o texto 20px para cima */
+    visibility: hidden;
+    background-color: #ffffff;
+    color: #00858b;
+    border: 1px solid #c3c3c3;
+    padding: 6px;
+    border-radius: 5px;
+    text-align: center;
+}
+
+#clearCartButton {
+    width: 80%;
+    margin: auto;
+    padding: 35px;
+    color: #00878e;
+    border: 1px solid gray;
+    border-radius: 24px;
+    text-align: center;
+    cursor: pointer;
+    margin-top: 45px;
+    margin-bottom: 120px;
+    font-size: 50px;
+}
+
+
+#clearcartContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    position: relative;  /* Adicione isso para posicionar o #copiedText em relação a este container */
+}
+
+#buttonContainer button {
+    flex-grow: 1;
+    margin: 0 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+}
+
+.fab, .far, .fa, .fas {
+    font-weight: 400;
+    margin-right: 16px;
+}
 @media (max-width: 678px) {
 
     .product-details {
@@ -697,13 +781,17 @@ footer {
         width: 20%;
     }
     #welcomePopup p {
-        font-size: 40px;
+        font-size: 20px;
+        margin-bottom: 5px;
     }
-    #welcomePopup button {
-        font-size: 30px;
-        width: 30%;
-  }
 
+  #welcomePopup button {
+    font-size: 25px;
+    width: 30%;
+     padding: 7px;
+    max-width: 255px;
+    margin: 5px;
+}
   .icons .insta-container img {
     width: 40px;
   }
@@ -812,9 +900,18 @@ button {
     font-size: 15px;
 }
 .contact-info img {
-    margin-right: 10px;
+    margin-right: 0px;
     height: 30px;
     width: 30px;
+}
+.contact-info p {
+    margin-left: 10px;
+}
+.contact-info {
+    margin-top: 25px;
+}
+#buttonContainer {
+    padding: 0px 80px;
 }
 footer {
     width: 100%;
@@ -822,22 +919,41 @@ footer {
     height: 100px;
     justify-content: center;
 }
-
+#clearCartButton {
+    margin: auto;
+    padding: 14px;
+    color: #00878e;
+    border: 1px solid gray;
+    border-radius: 24px;
+    text-align: center;
+    cursor: pointer;
+    margin-top: 6px;
+    margin-bottom: 22px;
+    font-size: 20px;
+    max-width: 300px;
+}
+.contact-info div {
+    margin-bottom: 10px;
+}
 .sizes[data-color="Natural"] {
     max-width: 40%;
 }
-        }
-.product div.added-banner {
-    background:  rgb(13 178 185);
+#total {
+    font-size: 25px;
+}
+#copiedText {
+    position: absolute;
+    bottom: 56px;
+    visibility: hidden;
+    background-color: #ffffff;
+    color: #00858b;
+    border: 1px solid #c3c3c3;
+    padding: 6px;
     border-radius: 5px;
-    margin-top: 20px;
-  }
-
+    text-align: center;
+    margin-left: 10px;
+}
 .popup-sizes .size .sizes2 {
-    /* display: flex; */
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+    column-gap: 10px;
 }
-#cart p button {
-    color: rgb(0 145 151);
-}
+        }
