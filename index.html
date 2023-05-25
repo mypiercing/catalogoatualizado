@@ -4,15 +4,9 @@
     <meta charset="UTF-8">
     <title>My Piercing Italy</title>
     <link rel="stylesheet" type="text/css" href="https://mypiercing.github.io/catalogo/site.css"> <link rel="icon" href="https://i.imgur.com/P8IA7eK.jpg">
-
-<meta property="og:type" content="website">
-    <meta property="og:url" content="https://mypiercing.github.io/catalogo/">
-    <meta property="og:title" content="My Piercing Italy">
-    <meta property="og:description" content="Há mais de 10 anos no ramo de Piercings">
-    <meta property="og:image" content="https://i.imgur.com/K3bDcYc.png">
-
     <link rel="icon" href="https://i.imgur.com/P8IA7eK.jpg">
     <meta name="theme-color" content="#dffafa">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
 </head>
 <body>
     <!-- Pop-up de boas-vindas -->
@@ -1085,8 +1079,15 @@
             <!-- Lista de produtos selecionados será preenchida aqui pelo JavaScript -->
         </div>
         <p>Total: €<span id="total">0</span></p>
-        <button id="copyButton">Copiar</button>
-        <button id="whatsappButton">Whatsapp</button>
+        <div id="buttonContainer">
+            <button id="copyButton"><i class="fas fa-copy"></i> Copiar</button>
+            <div id="copiedText"></div>
+            <button id="whatsappButton"><i class="fab fa-whatsapp"></i> Whatsapp</button>
+        </div>
+        
+    <div id="clearcartContainer">
+        <button id="clearCartButton"><i class="fas fa-trash-alt"></i> Limpar Carrinho</button>
+    </div>
     </section>
     <footer>
         <div class="contact-info">
