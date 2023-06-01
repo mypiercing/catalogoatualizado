@@ -160,7 +160,7 @@ document.getElementById("popup-close").addEventListener("click", closePopup);
 document.getElementById("whatsappButton").addEventListener("click", function() {
     var cartText = getCartItemsText();
     var totalText = "Total: €" + document.getElementById("total").innerText;
-    var freightText = "Freight: €" + freight.toFixed(2); // Assuming "freight" is a global variable
+    var freightText = "Frete: €" + freight.toFixed(2); // Assuming "freight" is a global variable
     var message = encodeURIComponent("Resumo da Compra:\n" + cartText + freightText + "\n" + totalText);
     window.open(`https://wa.me/393898986018?text=${message}`);
 });
