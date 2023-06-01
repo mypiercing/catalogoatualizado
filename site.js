@@ -151,26 +151,41 @@ function getCartItemsText() {
     var cartElements = document.getElementById("cart").children;
     var cartText = "";
     for (var i = 0; i < cartElements.length; i++) {
-        cartText += cartElements[i].querySelector(".product-info").innerText + "\n\n";
+        let productInfo = cartElements[i].querySelector(".product-info").innerText;
+        // We find the last line which contains the price calculation.
+        let lastLineStart = productInfo.lastIndexOf("\n") + 1;
+        let productText = productInfo.substring(0, lastLineStart);
+        let productPriceLine = productInfo.substring(lastLineStart);
+        // Now we can separate the price part to apply the bold effect
+        let productPriceParts = productPriceLine.split("=");
+        let productPrice = productPriceParts[0] + "=*" + productPriceParts[1].trim() + "*";
+        cartText += productText + productPrice + "\n\n";
     }
     return cartText;
 }
 
+
+
+
+
+
+
+
 document.getElementById("popup-close").addEventListener("click", closePopup);
 document.getElementById("whatsappButton").addEventListener("click", function() {
     var cartText = getCartItemsText();
-    var totalText = "Total: €" + document.getElementById("total").innerText;
-    var freightText = "Frete: €" + freight.toFixed(2); // Assuming "freight" is a global variable
-    var message = encodeURIComponent("Resumo da Compra:\n" + cartText + freightText + "\n" + totalText);
+    var totalText = "*Total: €" + document.getElementById("total").innerText + "*";
+    var freightText = "Frete: *€" + freight.toFixed(2) + "*"; // Assuming "freight" is a global variable
+    var message = encodeURIComponent("*Resumo da Compra:*\n\n" + cartText + freightText + "\n\n" + totalText);
     window.open(`https://wa.me/393898986018?text=${message}`);
 });
 document.getElementById("copyButton").addEventListener("click", function() {
     var cartText = getCartItemsText();
-    var totalText = "Total: €" + document.getElementById("total").innerText;
-    var freightText = "Frete: €" + freight.toFixed(2); // Assuming "freight" is a global variable
+    var totalText = "*Total: €" + document.getElementById("total").innerText + "*";
+    var freightText = "Frete: *€" + freight.toFixed(2) + "*"; // Assuming "freight" is a global variable
     var copiedText = document.createElement("textarea");
     copiedText.style = "position: absolute; left: -1000px; top: -1000px";
-    copiedText.value = "Resumo da Compra:\n" + cartText + freightText + "\n" + totalText;
+    copiedText.value = "*Resumo da Compra:*\n\n" + cartText + freightText + "\n\n" + totalText;
     document.body.appendChild(copiedText);
     copiedText.select();
     document.execCommand("copy");
@@ -193,3 +208,4 @@ document.getElementById("clearCartButton").addEventListener("click", function() 
         localStorage.removeItem("cart");
     }
 });
+
