@@ -148,29 +148,47 @@ function closePopup() {
 }
 
 function getCartItemsText() {
-    for (var e = document.getElementById("cart").children, t = "", n = 0; n < e.length; n++) t += e[n].querySelector(".product-info").innerText + "\n\n";
-    return t
+    var cartElements = document.getElementById("cart").children;
+    var cartText = "";
+    for (var i = 0; i < cartElements.length; i++) {
+        cartText += cartElements[i].querySelector(".product-info").innerText + "\n\n";
+    }
+    return cartText;
 }
-document.getElementById("popup-close").addEventListener("click", closePopup), document.getElementById("whatsappButton").addEventListener("click", function() {
-    var e, t = getCartItemsText(),
-        n = encodeURIComponent("Resumo da Compra:\n" + t + "Total: €" + document.getElementById("total").innerText);
-    window.open(`https://wa.me/393898986018?text=${n}`)
-}), document.getElementById("copyButton").addEventListener("click", function() {
-    var e = getCartItemsText(),
-        t = document.getElementById("total").innerText,
-        n = document.createElement("textarea");
-    n.style = "position: absolute; left: -1000px; top: -1000px", n.value = "Resumo da Compra:\n" + e + "Total: €" + t, document.body.appendChild(n), n.select(), document.execCommand("copy"), document.body.removeChild(n);
-    var r = document.getElementById("copiedText");
-    r.innerText = "Copiado!", r.style.visibility = "visible", setTimeout(function() {
-        r.style.visibility = "hidden"
-    }, 3e3)
-}), document.getElementById("clearCartButton").addEventListener("click", function() {
-    if (confirm("Voc\xea deseja remover todos os produtos do carrinho?")) {
-        var e = document.getElementById("cart");
-        while (e.firstChild) {
-            e.firstChild.remove();
+
+document.getElementById("popup-close").addEventListener("click", closePopup);
+document.getElementById("whatsappButton").addEventListener("click", function() {
+    var cartText = getCartItemsText();
+    var totalText = "Total: €" + document.getElementById("total").innerText;
+    var freightText = "Freight: €" + freight.toFixed(2); // Assuming "freight" is a global variable
+    var message = encodeURIComponent("Resumo da Compra:\n" + cartText + freightText + "\n" + totalText);
+    window.open(`https://wa.me/393898986018?text=${message}`);
+});
+document.getElementById("copyButton").addEventListener("click", function() {
+    var cartText = getCartItemsText();
+    var totalText = "Total: €" + document.getElementById("total").innerText;
+    var freightText = "Frete: €" + freight.toFixed(2); // Assuming "freight" is a global variable
+    var copiedText = document.createElement("textarea");
+    copiedText.style = "position: absolute; left: -1000px; top: -1000px";
+    copiedText.value = "Resumo da Compra:\n" + cartText + freightText + "\n" + totalText;
+    document.body.appendChild(copiedText);
+    copiedText.select();
+    document.execCommand("copy");
+    document.body.removeChild(copiedText);
+    var copyConfirmation = document.getElementById("copiedText");
+    copyConfirmation.innerText = "Copiado!";
+    copyConfirmation.style.visibility = "visible";
+    setTimeout(function() {
+        copyConfirmation.style.visibility = "hidden";
+    }, 3e3);
+});
+
+document.getElementById("clearCartButton").addEventListener("click", function() {
+    if (confirm("Você deseja remover todos os produtos do carrinho?")) {
+        var cart = document.getElementById("cart");
+        while (cart.firstChild) {
+            cart.firstChild.remove();
         }
-        // se o carrinho estiver vazio após a limpeza, o total será zero
         document.getElementById("total").innerText = "0";
         localStorage.removeItem("cart");
     }
