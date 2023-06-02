@@ -30,21 +30,20 @@ let itemsInCart = 0;
 window.addEventListener("DOMContentLoaded", e => {
     let cartItems = JSON.parse(localStorage.getItem("cart") || "[]");
     let total = 0;
-    let itemsInCart = cartItems.length;
+    let expirationTime = 4 * 60 * 60 * 1000;  // 4 horas
+
+    cartItems = cartItems.filter(item => {
+        // Remove itens do carrinho que foram adicionados há mais de uma semana
+        if (new Date().getTime() - item.date > expirationTime) {
+            return false;
+        }
+        return true;
+    });
+
+    itemsInCart = cartItems.length;  // Modificado aqui
 
     function t() {
-        for (var e = document.getElementsByClassName("color"), t = 0; t < e.length; t++) {
-            var n = parseFloat(e[t].getAttribute("data-price"));
-            n *= 1.22, e[t].setAttribute("data-price", n.toFixed(2));
-            var r = e[t].innerText.replace(/€\s*\d+(\.\d{1,2})?/, "").trim();
-            e[t].innerText = r + "€" + n.toFixed(2)
-        }
-        for (var o = document.getElementsByClassName("measure"), t = 0; t < o.length; t++) {
-            var n = parseFloat(o[t].getAttribute("data-price"));
-            n *= 1.22, o[t].setAttribute("data-price", n.toFixed(2));
-            var l = o[t].innerText.replace(/€\s*\d+(\.\d{1,2})?/, "").trim();
-            o[t].innerText = l
-        }
+        // Restante do seu código...
     }
 
     document.getElementById("welcomePopup").style.display = "flex", document.body.style.overflow = "hidden", document.getElementById("individualButton").addEventListener("click", function() {
@@ -53,24 +52,28 @@ window.addEventListener("DOMContentLoaded", e => {
         document.getElementById("welcomePopup").style.display = "none", document.body.style.overflow = ""
     });
 
-    if (cartItems.length > 0) {
-        var o;
+    if (itemsInCart > 0) {
         let l = document.getElementById("cart");
         for (let item of cartItems) {
             let d = document.createElement("div");
-            d.innerHTML = item;
+            d.innerHTML = item.item;
             let s = d.firstChild;
             s.querySelector("button").addEventListener("click", removeFromCart), l.appendChild(s);
-            total += parseFloat(s.querySelector(".product-info > span").innerText.match(/€(\d+(\.\d{1,2})?) \* (\d+) unid = €(\d+(\.\d{1,2})?)/)[4])
+            total += parseFloat(s.querySelector(".product-info > span").innerText.match(/€(\d+(\.\d{1,2})?) \* (\d+) unid = €(\d+(\.\d{1,2})?)/)[4]);
         }
 
-        total += freight;  // adiciona o valor do frete ao total
+        total += freight;  // adiciona o valor do frete ao total a cada vez que a página é carregada
         document.getElementById("total").innerText = total.toFixed(2);
     } else {
         // se o carrinho está vazio, o total deve ser o valor do frete
         document.getElementById("total").innerText = freight.toFixed(2);
     }
+
+    // Atualize o localStorage após a limpeza
+    localStorage.setItem("cart", JSON.stringify(cartItems));
 });
+
+
 
 
 
@@ -94,15 +97,18 @@ function addToCartFromPopup() {
             g.innerText = "€" + a.toFixed(2) + " * " + d + " unid = €" + (a * d).toFixed(2), y.appendChild(document.createElement("br")), y.appendChild(g), m.appendChild(y);
             var v = document.createElement("button");
             v.innerText = "X", v.addEventListener("click", removeFromCart), m.appendChild(v), c.appendChild(m);
+
             let E = JSON.parse(localStorage.getItem("cart") || "[]");
-            E.push(m.outerHTML), localStorage.setItem("cart", JSON.stringify(E));
+            E.push({ item: m.outerHTML, date: new Date().getTime() });  // Adiciona a data e a hora em que o item foi adicionado
+            localStorage.setItem("cart", JSON.stringify(E));
+
             var x = document.getElementById("total");
 
             f += a * d;
 
             // se o carrinho estava vazio antes de adicionar o item, adicione o valor do frete ao total
             if (itemsInCart === 0) {
-                f += freight;
+                f += 0;
             }
             itemsInCart++;  // incrementa o contador de itens
             x.innerText = f.toFixed(2);
@@ -115,6 +121,7 @@ function addToCartFromPopup() {
     closePopup()
 }
 
+
 function removeFromCart(e) {
     itemsInCart--;  // decrementa o contador de itens
     var t = e.target.parentNode,
@@ -122,17 +129,27 @@ function removeFromCart(e) {
         r = parseFloat(n[1]),
         o = parseInt(n[3]),
         l = document.getElementById("total"),
-        a = parseFloat(l.innerText),
+        a = parseFloat(l.innerText) - freight, // subtract freight before calculating the new total
         c = document.getElementById("cart");
 
-    a -= r * o, l.innerText = a.toFixed(2), t.remove();
+    // subtract the value of the item from the total
+    a -= r * o;
+    t.remove();
 
-    // se todos os itens forem removidos do carrinho, subtrai o valor do frete do total
+    // Remove the item from the cart in localStorage
+    let cartItems = JSON.parse(localStorage.getItem("cart") || "[]");
+    cartItems = cartItems.filter(item => item.item !== t.outerHTML);
+    localStorage.setItem("cart", JSON.stringify(cartItems));
+
+    // if all items are removed from the cart, the total should be the freight value
     if (itemsInCart === 0) {
-        a -= freight;
-        l.innerText = a.toFixed(2);
+        l.innerText = freight.toFixed(2);
+    } else {
+        l.innerText = (a + freight).toFixed(2);
     }
 }
+
+
 
     
 window.addEventListener("resize", function() {
@@ -208,4 +225,3 @@ document.getElementById("clearCartButton").addEventListener("click", function() 
         localStorage.removeItem("cart");
     }
 });
-
