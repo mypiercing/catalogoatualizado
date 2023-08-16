@@ -201,7 +201,7 @@ button.color:focus:active {
     font-size: 60px;
 }
 #total-label {
-    font-size: 60px;
+    font-size: 60px!important;
   }
 #purchaseSummary p {
     color: #000000;
