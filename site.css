@@ -201,7 +201,7 @@ button.color:focus:active {
     font-size: 60px;
 }
 #total-label {
-    font-size: 60px!important;
+    font-size: 25;
   }
 #purchaseSummary p {
     color: #000000;
@@ -459,8 +459,6 @@ footer {
 #cart p button {
     color: rgb(0 145 151);
 }
-#purchaseSummary {
-}
 #buttonContainer {
     display: flex;
     justify-content: space-between;
@@ -516,6 +514,11 @@ footer {
     margin-right: 16px;
 }
 @media (max-width: 678px) {
+
+    #total-label {
+        font-size: 60px!important;
+      }
+      
     .product-details {
         margin-left: 25px;
     }
