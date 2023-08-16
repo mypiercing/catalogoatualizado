@@ -201,7 +201,7 @@ button.color:focus:active {
     font-size: 60px;
 }
 #total-label {
-    font-size: 25;
+    font-size: 25px;
   }
 #purchaseSummary p {
     color: #000000;
@@ -518,7 +518,7 @@ footer {
     #total-label {
         font-size: 60px!important;
       }
-      
+
     .product-details {
         margin-left: 25px;
     }
