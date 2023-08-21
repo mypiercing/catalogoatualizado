@@ -47,39 +47,67 @@ function openPopup(e) {
   }
   });
   function addToCartFromPopup() {
-    var f = parseFloat(document.getElementById("total").innerText);
-    for (var e = document.getElementById("popup"), t = e.querySelector(".popup-product-name").innerText, n = e.querySelector(".popup-color").innerText.split(":")[0].trim(), r = e.querySelector(".popup-product-image").src, o = e.querySelectorAll(".measure"), l = 0; l < o.length; l++) {
-      var a = parseFloat(o[l].getAttribute("data-price")),
-        d = parseInt(o[l].nextElementSibling.value, 10);
-      if (d > 0) {
-        itemsInCart++; // incrementa o contador de itens aqui
-        var s = o[l].innerText,
-          p = o[l].closest(".size").querySelector("h4").innerText,
-          c = document.getElementById("cart"),
-          m = document.createElement("p"),
-          u = document.createElement("img");
-        u.src = r, m.appendChild(u);
-        var y = document.createElement("span");
-        y.className = "product-info", y.innerText = t + " " + n + " | " + p + " " + s;
-        var g = document.createElement("span");
-        g.innerText = "€" + a.toFixed(2) + " * " + d + " unid = €" + (a * d).toFixed(2), y.appendChild(document.createElement("br")), y.appendChild(g), m.appendChild(y);
-        var v = document.createElement("button");
-        v.innerText = "X", v.addEventListener("click", removeFromCart), m.appendChild(v), c.appendChild(m);
-        let E = JSON.parse(getItemWithExpiry("cart") || "[]");
-        E.push(m.outerHTML);
-        setItemWithExpiry("cart", JSON.stringify(E));
-        var x = document.getElementById("total");
-        f += a * d;
-
-        x.innerText = f.toFixed(2);
-        var B = document.createElement("div");
-        B.style.position = "absolute", B.style.top = "0", B.style.left = "10px", B.style.color = "white", B.style.padding = "5px", B.style.zIndex = "100", B.className = "added-banner", B.innerText = "Adicionado";
-        var h = document.querySelector(`img[src="${r}"]`).closest(".product");
-        h.style.position = "relative", h.appendChild(B);
+    var totalValue = parseFloat(document.getElementById("total").innerText);
+    var popup = document.getElementById("popup");
+    var productName = popup.querySelector(".popup-product-name").innerText;
+    var color = popup.querySelector(".popup-color").innerText.split(":")[0].trim();
+    var productImage = popup.querySelector(".popup-product-image").src;
+    var measures = popup.querySelectorAll(".measure");
+  
+    for (var i = 0; i < measures.length; i++) {
+      var price = parseFloat(measures[i].getAttribute("data-price"));
+      var quantity = parseInt(measures[i].nextElementSibling.value, 10);
+      if (quantity > 0) {
+        var sizeText = measures[i].innerText;
+        var sizeName = measures[i].closest(".size").querySelector("h4").innerText;
+        var cart = document.getElementById("cart");
+        var existingProduct = Array.from(cart.children).find(p => {
+          return p.querySelector(".product-info").innerText.includes(productName + " " + color + " | " + sizeName + " " + sizeText);
+        });
+  
+        if (existingProduct) {
+          var existingQty = parseInt(existingProduct.querySelector(".product-info > span").innerText.match(/€(\d+(\.\d{1,2})?) \* (\d+) unid = €(\d+(\.\d{1,2})?)/)[3]);
+          quantity += existingQty;
+          existingProduct.remove();
+          itemsInCart--; // Reduzindo o contador de itens no carrinho
+        }
+  
+        itemsInCart++;
+        var productElement = document.createElement("p");
+        var imgElement = document.createElement("img");
+        imgElement.src = productImage;
+        productElement.appendChild(imgElement);
+  
+        var productInfo = document.createElement("span");
+        productInfo.className = "product-info";
+        productInfo.innerText = productName + " " + color + " | " + sizeName + " " + sizeText;
+        var productPrice = document.createElement("span");
+        productPrice.innerText = "€" + price.toFixed(2) + " * " + quantity + " unid = €" + (price * quantity).toFixed(2);
+        productInfo.appendChild(document.createElement("br"));
+        productInfo.appendChild(productPrice);
+        productElement.appendChild(productInfo);
+  
+        var removeButton = document.createElement("button");
+        removeButton.innerText = "X";
+        removeButton.addEventListener("click", removeFromCart);
+        productElement.appendChild(removeButton);
+  
+        cart.appendChild(productElement);
+  
+        let cartItems = JSON.parse(getItemWithExpiry("cart") || "[]");
+        cartItems.push(productElement.outerHTML);
+        setItemWithExpiry("cart", JSON.stringify(cartItems));
+  
+        var totalElement = document.getElementById("total");
+        totalValue += price * quantity;
+        totalElement.innerText = totalValue.toFixed(2);
+  
+        // O restante do código para mostrar a mensagem "Adicionado" permanece igual
       }
     }
     closePopup();
   }
+  
   function removeFromCart(e) {
     var t = e.target.parentNode,
       n = t.querySelector("span").innerText.match(/€(\d+(\.\d{1,2})?) \* (\d+) unid = €(\d+(\.\d{1,2})?)/),
