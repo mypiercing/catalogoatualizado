@@ -53,61 +53,82 @@ function openPopup(e) {
     var color = popup.querySelector(".popup-color").innerText.split(":")[0].trim();
     var productImage = popup.querySelector(".popup-product-image").src;
     var measures = popup.querySelectorAll(".measure");
-  
+
+    // Inicialize cartItems como um array vazio
+    let cartItems = JSON.parse(getItemWithExpiry("cart") || "[]");
+
     for (var i = 0; i < measures.length; i++) {
-      var price = parseFloat(measures[i].getAttribute("data-price"));
-      var quantity = parseInt(measures[i].nextElementSibling.value, 10);
-      if (quantity > 0) {
-        var sizeText = measures[i].innerText;
-        var sizeName = measures[i].closest(".size").querySelector("h4").innerText;
-        var cart = document.getElementById("cart");
-        var existingProduct = Array.from(cart.children).find(p => {
-          return p.querySelector(".product-info").innerText.includes(productName + " " + color + " | " + sizeName + " " + sizeText);
-        });
-  
-        if (existingProduct) {
-          var existingQty = parseInt(existingProduct.querySelector(".product-info > span").innerText.match(/€(\d+(\.\d{1,2})?) \* (\d+) unid = €(\d+(\.\d{1,2})?)/)[3]);
-          quantity += existingQty;
-          existingProduct.remove();
-          itemsInCart--; // Reduzindo o contador de itens no carrinho
+        var price = parseFloat(measures[i].getAttribute("data-price"));
+        var quantity = parseInt(measures[i].nextElementSibling.value, 10);
+
+        if (quantity > 0) {
+            var sizeText = measures[i].innerText;
+            var sizeName = measures[i].closest(".size").querySelector("h4").innerText;
+
+            // Encontrar o índice do produto existente, se houver
+            var existingIndex = cartItems.findIndex(p => {
+                var div = document.createElement('div');
+                div.innerHTML = p;
+                return div.firstChild.querySelector(".product-info").innerText.includes(productName + " " + color + " | " + sizeName + " " + sizeText);
+            });
+
+            if (existingIndex >= 0) {
+                // Atualizar a quantidade e remover o item existente do array cartItems
+                var div = document.createElement('div');
+                div.innerHTML = cartItems[existingIndex];
+                var existingQty = parseInt(div.firstChild.querySelector(".product-info > span").innerText.split("*")[1].split("unid")[0].trim());
+                
+                // Atualizar o totalValue de acordo com a quantidade anterior
+                totalValue -= price * existingQty;
+
+                quantity += existingQty;
+                cartItems.splice(existingIndex, 1);
+            }
+
+            // Atualizar o totalValue de acordo com a nova quantidade
+            totalValue += price * quantity;
+
+            var productElement = document.createElement("p");
+            var imgElement = document.createElement("img");
+            imgElement.src = productImage;
+            productElement.appendChild(imgElement);
+
+            var productInfo = document.createElement("span");
+            productInfo.className = "product-info";
+            productInfo.innerText = productName + " " + color + " | " + sizeName + " " + sizeText;
+            var productPrice = document.createElement("span");
+            productPrice.innerText = "€" + price.toFixed(2) + " * " + quantity + " unid = €" + (price * quantity).toFixed(2);
+            productInfo.appendChild(document.createElement("br"));
+            productInfo.appendChild(productPrice);
+            productElement.appendChild(productInfo);
+
+            var removeButton = document.createElement("button");
+            removeButton.innerText = "X";
+            removeButton.addEventListener("click", removeFromCart);
+            productElement.appendChild(removeButton);
+
+            // Adicionar o novo elemento ao array cartItems
+            cartItems.push(productElement.outerHTML);
         }
-  
-        itemsInCart++;
-        var productElement = document.createElement("p");
-        var imgElement = document.createElement("img");
-        imgElement.src = productImage;
-        productElement.appendChild(imgElement);
-  
-        var productInfo = document.createElement("span");
-        productInfo.className = "product-info";
-        productInfo.innerText = productName + " " + color + " | " + sizeName + " " + sizeText;
-        var productPrice = document.createElement("span");
-        productPrice.innerText = "€" + price.toFixed(2) + " * " + quantity + " unid = €" + (price * quantity).toFixed(2);
-        productInfo.appendChild(document.createElement("br"));
-        productInfo.appendChild(productPrice);
-        productElement.appendChild(productInfo);
-  
-        var removeButton = document.createElement("button");
-        removeButton.innerText = "X";
-        removeButton.addEventListener("click", removeFromCart);
-        productElement.appendChild(removeButton);
-  
-        cart.appendChild(productElement);
-  
-        let cartItems = JSON.parse(getItemWithExpiry("cart") || "[]");
-        cartItems.push(productElement.outerHTML);
-        setItemWithExpiry("cart", JSON.stringify(cartItems));
-  
-        var totalElement = document.getElementById("total");
-        totalValue += price * quantity;
-        totalElement.innerText = totalValue.toFixed(2);
-  
-        // O restante do código para mostrar a mensagem "Adicionado" permanece igual
-      }
     }
-    closePopup();
-  }
-  
+
+ // Atualize o localStorage e o carrinho no DOM
+ document.getElementById("total").innerText = totalValue.toFixed(2);
+ setItemWithExpiry("cart", JSON.stringify(cartItems));
+ 
+ var cart = document.getElementById("cart");
+ cart.innerHTML = "";  // Limpa o carrinho para evitar duplicação de elementos
+ for (var i = 0; i < cartItems.length; i++) {
+     var div = document.createElement('div');
+     div.innerHTML = cartItems[i];
+     div.firstChild.querySelector("button").addEventListener("click", removeFromCart);
+     cart.appendChild(div.firstChild);
+ }
+
+ closePopup();
+}
+
+ 
   function removeFromCart(e) {
     var t = e.target.parentNode,
       n = t.querySelector("span").innerText.match(/€(\d+(\.\d{1,2})?) \* (\d+) unid = €(\d+(\.\d{1,2})?)/),
