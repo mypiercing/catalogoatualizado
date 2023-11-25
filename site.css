@@ -1526,3 +1526,6 @@ button.colorthree[data-color="Natural"] {
     margin: 5px;
     font-weight: 100;
 }
+.product div.added-banner {
+    z-index: 15!important;
+}
