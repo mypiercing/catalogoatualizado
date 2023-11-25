@@ -1521,3 +1521,8 @@ button.colorthree[data-color="Natural"] {
     background-image: linear-gradient(-180deg, #f7f7f7 0%, #ededed 100%);
 
 }
+#productList h2 {
+    color: gray;
+    margin: 5px;
+    font-weight: 100;
+}
