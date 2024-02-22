@@ -1,3 +1,11 @@
+.product .measure-title {
+    display: none; /* ou visibility: hidden; */
+}
+
+.popup .measure-title {
+    display: block; /* ou visibility: visible; */
+}
+
 /* Estilo do botão de carrinho */
 .cart-button {
     position: fixed;
