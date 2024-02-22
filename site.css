@@ -1,3 +1,6 @@
+.sizes h4.popup-title {
+    display: none;
+}
 .product .measure-title {
     display: none; /* ou visibility: hidden; */
 }
