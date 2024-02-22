@@ -15,6 +15,13 @@ function openPopup(e) {
       d.removeChild(d.firstChild);
   }
 
+  // Verificar se existe um título para os tamanhos e adicionar ao popup
+  var sizeTitle = t.querySelector('.sizes > .popup-title');
+  if (sizeTitle) {
+    var clonedTitle = sizeTitle.cloneNode(true);
+    d.appendChild(clonedTitle);
+  }
+
   var a = t.querySelectorAll('.sizes[data-color="' + n + '"] > .size');
   for (var s = 0; s < a.length; s++) {
     var p = a[s].cloneNode(true);
@@ -29,55 +36,55 @@ function openPopup(e) {
             measureContainer.removeChild(existingInput);
         }
 
-          // Criar o contêiner para os controles (botões e input)
-          var controlsContainer = document.createElement("div");
-          controlsContainer.className = "controls";
+        // Criar o contêiner para os controles (botões e input)
+        var controlsContainer = document.createElement("div");
+        controlsContainer.className = "controls";
 
-          // Criar e configurar os botões e o input
-          var decreaseButton = document.createElement("button");
-          decreaseButton.innerText = "-";
-          decreaseButton.className = "decrease-button";
+        // Criar e configurar os botões e o input
+        var decreaseButton = document.createElement("button");
+        decreaseButton.innerText = "-";
+        decreaseButton.className = "decrease-button";
 
-          var increaseButton = document.createElement("button");
-          increaseButton.innerText = "+";
-          increaseButton.className = "increase-button";
+        var increaseButton = document.createElement("button");
+        increaseButton.innerText = "+";
+        increaseButton.className = "increase-button";
 
-          var quantityInput = document.createElement("input");
-          quantityInput.type = "number";
-          quantityInput.min = "0";
-          quantityInput.className = "measure-quantity";
+        var quantityInput = document.createElement("input");
+        quantityInput.type = "number";
+        quantityInput.min = "0";
+        quantityInput.className = "measure-quantity";
 
-          // Adicionar os botões e o input ao contêiner de controles
-          controlsContainer.appendChild(decreaseButton);
-          controlsContainer.appendChild(quantityInput);
-          controlsContainer.appendChild(increaseButton);
+        // Adicionar os botões e o input ao contêiner de controles
+        controlsContainer.appendChild(decreaseButton);
+        controlsContainer.appendChild(quantityInput);
+        controlsContainer.appendChild(increaseButton);
 
-          // Adicionar o contêiner de controles ao measureContainer
-          measureContainer.appendChild(controlsContainer);
+        // Adicionar o contêiner de controles ao measureContainer
+        measureContainer.appendChild(controlsContainer);
 
-          // Eventos para os botões
-          decreaseButton.addEventListener("click", function(event) {
-              let inputElement = event.target.parentNode.querySelector(".measure-quantity");
-              let currentValue = parseInt(inputElement.value, 10);
-              if (isNaN(currentValue)) {
-                  currentValue = 0;
-              }
-              if (currentValue > 0) {
-                  inputElement.value = currentValue - 1;
-              }
-          });
+        // Eventos para os botões
+        decreaseButton.addEventListener("click", function(event) {
+            let inputElement = event.target.parentNode.querySelector(".measure-quantity");
+            let currentValue = parseInt(inputElement.value, 10);
+            if (isNaN(currentValue)) {
+                currentValue = 0;
+            }
+            if (currentValue > 0) {
+                inputElement.value = currentValue - 1;
+            }
+        });
 
-          increaseButton.addEventListener("click", function(event) {
-              let inputElement = event.target.parentNode.querySelector(".measure-quantity");
-              let currentValue = parseInt(inputElement.value, 10);
-              if (isNaN(currentValue)) {
-                  currentValue = 0;
-              }
-              inputElement.value = currentValue + 1;
-          });
-      }
+        increaseButton.addEventListener("click", function(event) {
+            let inputElement = event.target.parentNode.querySelector(".measure-quantity");
+            let currentValue = parseInt(inputElement.value, 10);
+            if (isNaN(currentValue)) {
+                currentValue = 0;
+            }
+            inputElement.value = currentValue + 1;
+        });
+    }
 
-      d.appendChild(p);
+    d.appendChild(p);
   }
 
   o.style.display = "block";
