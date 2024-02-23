@@ -1,4 +1,8 @@
 /* CSS para o pop-up */
+
+.product h3 {
+    text-align: center;
+}
 #popup .popup-sizes .popup-title {
     text-align: center;
     width: 100%;
