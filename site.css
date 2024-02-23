@@ -1,27 +1,3 @@
-/* CSS para o pop-up */
-
-.product h3 {
-    text-align: center;
-}
-#popup .popup-sizes .popup-title {
-    text-align: center;
-    width: 100%;
-    order: -1; /* Isso coloca o título acima de todos os elementos .size */
-    font-size: 20px; /* Ajuste conforme necessário */
-    margin-bottom: 20px; /* Espaço entre o título e as colunas */
-}
-
-.sizes h4.popup-title {
-    display: none;
-}
-.product .measure-title {
-    display: none; /* ou visibility: hidden; */
-}
-
-.popup .measure-title {
-    display: block; /* ou visibility: visible; */
-}
-
 /* Estilo do botão de carrinho */
 .cart-button {
     position: fixed;
