@@ -653,6 +653,7 @@ flex-wrap: wrap;
     display: flex;
     justify-content: space-between;
     margin: 0 4px 0 4px;
+        justify-items: center;
 }
     #total-label {
         font-size: 25px;
