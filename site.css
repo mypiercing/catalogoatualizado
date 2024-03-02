@@ -1128,6 +1128,7 @@ flex-wrap: wrap;
         display: grid;
         grid-template-columns: repeat(3, 1fr); /* Cria cinco colunas de tamanhos iguais */
         gap: 10px; /* Espaçamento entre as colunas e linhas */
+        justify-items: center;
     }
     }
 @media (min-width: 768px) {
@@ -1135,6 +1136,7 @@ flex-wrap: wrap;
     display: grid;
     grid-template-columns: repeat(4, 1fr); /* Cria cinco colunas de tamanhos iguais */
     gap: 10px; /* Espaçamento entre as colunas e linhas */
+        justify-items: center;
 }
 }
 @media (min-width: 1024px) {
