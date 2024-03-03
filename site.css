@@ -535,6 +535,48 @@ button.color:focus:active {
     box-shadow: -3px 0px 20px 0px #00000085;
     z-index: 19;
 }
+
+    button.colortwo[data-color="Natural"] {
+        background-image: linear-gradient(-180deg, #f7f7f7 0%, #ededed 100%);
+ 
+    }
+        button.colortwo[data-color="Black"] {
+        background-image: linear-gradient(-180deg, #838383 0%, #444444 100%);
+        color: #ffffff;
+    }
+    button.colortwo[data-color="Gold"] {
+        background-image: linear-gradient(-180deg, #fff2b3 0%, #ffed92 100%);
+        color: #000;
+    }
+ .colors .colortwo {
+            width: 70px;
+        background-color: #444;
+        border-radius: 10px;
+        cursor: pointer;
+        border: 1px solid #979797;
+        color: #000;
+        font-size: 15px;
+        margin: 2px;
+        display: flex;
+        justify-content: center;
+        padding: 5px;
+        height: 41px;
+        align-items: center;
+    }
+ .colors .color {
+    background-color: #444;
+    border-radius: 10px;
+    cursor: pointer;
+    border: 1px solid #979797;
+    font-size: 15px;
+    margin: 2px;
+    display: flex;
+    justify-content: center;
+    padding: 5px;
+    height: 41px;
+    align-items: center;
+        width: 70px;
+}
 @media (max-width: 678px) {
 .bpw-powered {
     display: none!important;
