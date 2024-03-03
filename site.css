@@ -615,7 +615,6 @@ button.color:focus:active {
     }
     .colors .colorthree {
         background-color: #444;
-        color: #ddd;
         border-radius: 10px;
         cursor: pointer;
         border: 1px solid #979797;
@@ -1555,4 +1554,20 @@ button.colorthree[data-color="Natural"] {
 }
 .product div.added-banner {
     z-index: 15!important;
+}
+@media (max-width: 678px) {
+.colors .color-large {
+    background-color: #444;
+    color: #ddd;
+    border-radius: 10px;
+    cursor: pointer;
+    border: 1px solid #979797;
+    font-size: 15px;
+    margin: 2px;
+    display: flex;
+    justify-content: center;
+    padding: 5px;
+    height: 41px;
+    align-items: center;
+}
 }
