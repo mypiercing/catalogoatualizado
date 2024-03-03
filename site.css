@@ -1597,4 +1597,17 @@ button.colorthree[data-color="Natural"] {
     height: 41px;
     align-items: center;
 }
+    .colors .color {
+    background-color: #444;
+    border-radius: 10px;
+    cursor: pointer;
+    border: 1px solid #979797;
+    font-size: 15px;
+    margin: 2px;
+    display: flex;
+    justify-content: center;
+    padding: 5px;
+    height: 41px;
+    align-items: center;
+}
 }
