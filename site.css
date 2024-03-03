@@ -804,7 +804,7 @@ flex-wrap: wrap;
     }
     #productList h2 {
         font-size: 15px;
-        color: gray;
+        color: #535353;
         margin: 5px;
         font-weight: 100;
     }
@@ -1632,7 +1632,7 @@ button.colorthree[data-color="Natural"] {
 
 }
 #productList h2 {
-    color: gray;
+    color: #535353;
     margin: 5px;
     font-weight: 100;
 }
