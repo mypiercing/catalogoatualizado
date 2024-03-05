@@ -1657,14 +1657,18 @@ button.colorthree[data-color="Natural"] {
     
 }
 
-.popup-sizes {
-    max-width: 600px; /* Ajuste conforme necessário */
-    overflow-x: auto; /* Habilita a rolagem horizontal quando o conteúdo exceder a largura */
-    white-space: nowrap; /* Mantém todos os itens de tamanho na mesma linha */
-    display: flex; /* Faz com que os elementos filho (sizes) se alinhem horizontalmente */
-    gap: 10px; /* Espaçamento entre os elementos filho para melhor visualização */
+#popup .popup-sizes {
+    display: flex; /* Faz com que os filhos (sizes) fiquem em linha */
+    overflow-x: auto; /* Permite rolagem horizontal se o conteúdo exceder a largura do elemento */
+    white-space: nowrap; /* Impede que os filhos quebrem a linha */
+    padding-bottom: 10px; /* Mantém um padding para a estética, ajuste conforme necessário */
+    max-width: 100%; /* Limita a largura máxima para evitar que o elemento cresça indefinidamente */
+    box-sizing: border-box; /* Garante que padding e border sejam incluídos na largura total */
 }
-.size {
-    display: inline-block; /* Garante que os elementos de tamanho sejam tratados como blocos inline */
-    white-space: normal; /* Permite que o texto dentro dos elementos de tamanho quebre normalmente */
+
+#popup .popup-sizes .size {
+    flex: 0 0 auto; /* Impede que os itens sejam esticados ou encolhidos */
+    white-space: normal; /* Permite que o conteúdo dentro de cada size possa quebrar a linha normalmente */
+    display: inline-block; /* Trata cada size como um bloco, mas alinha-os em linha */
 }
+
