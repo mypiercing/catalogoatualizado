@@ -508,10 +508,7 @@ button.color:focus:active {
     margin: 3px 0;
     text-align: center;
 }
-#popup .popup-sizes {
-    display: flex;
-    justify-content: space-around;
-}
+
 #popup .popup-sizes .sizes {
     width: 100%;
     max-width: 250px;
