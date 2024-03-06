@@ -1661,7 +1661,6 @@ button.colorthree[data-color="Natural"] {
     max-width: 100%; /* Limita a largura máxima para evitar que o elemento cresça indefinidamente */
     box-sizing: border-box; /* Garante que padding e border sejam incluídos na largura total */
     column-gap: 25px;
-    justify-content: space-between;
 }
 
 #popup .popup-sizes .size {
@@ -1670,7 +1669,7 @@ button.colorthree[data-color="Natural"] {
     display: inline-block; /* Trata cada size como um bloco, mas alinha-os em linha */
 }
 
-@media (min-width: 768px) {
-    #popup .popup-sizes {   justify-content: space-between;
-    }
+
+.special {
+justify-content: space-between!important;
 }
