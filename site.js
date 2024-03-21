@@ -20,12 +20,13 @@ if (popupTitle) {
         d.removeChild(d.firstChild);
     }
   
-    // Verificar se existe um título para os tamanhos e adicionar ao popup
-    var sizeTitle = t.querySelector('.sizes > .popup-title');
-    if (sizeTitle) {
-      var clonedTitle = sizeTitle.cloneNode(true);
-      d.appendChild(clonedTitle);
+    // Clonar e adicionar o popup-title depois de limpar os filhos de popup-sizes
+    var popupTitle = t.querySelector('.product-details > .popup-title');
+    if (popupTitle) {
+        var clonedTitle = popupTitle.cloneNode(true);
+        d.prepend(clonedTitle); // Usa prepend para adicionar o título no início do popup-sizes
     }
+
   
     var a = t.querySelectorAll('.sizes[data-color="' + n + '"] > .size');
     for (var s = 0; s < a.length; s++) {
