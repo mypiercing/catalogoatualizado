@@ -989,9 +989,7 @@ flex-wrap: wrap;
     .size {
         padding-right: 30px;
     }
-    #popup .popup-sizes {
-        justify-content: space-between;
-    }
+
     #popup-logo {
         width: 20%;
     }
@@ -1323,9 +1321,7 @@ flex-wrap: wrap;
     .size {
         padding-right: 30px;
     }
-    #popup .popup-sizes {
-        justify-content: space-between;
-    }
+ 
     #popup-logo {
         width: 20%;
     }
@@ -1682,6 +1678,7 @@ button.colorthree[data-color="Natural"] {
     max-width: 100%; /* Limita a largura máxima para evitar que o elemento cresça indefinidamente */
     box-sizing: border-box; /* Garante que padding e border sejam incluídos na largura total */
     column-gap: 25px;
+    justify-content: flex-start;
 }
 
 #popup .popup-sizes .size {
