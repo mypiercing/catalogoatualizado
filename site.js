@@ -1,110 +1,93 @@
 function openPopup(e) {
-  var t = e.target.closest(".product"),
-      n = e.target.getAttribute("data-color"),
-      r = e.target.getAttribute("data-price"),
-      o = document.getElementById("popup");
-
-  // Configura o nome do produto e cor/preço no popup
-  o.getElementsByClassName("popup-product-name")[0].innerText = t.getElementsByClassName("product-name")[0].innerText;
-  o.getElementsByClassName("popup-color")[0].innerText = n + ": € " + r;
-
-  // Configura a imagem do produto no popup
-  var l = t.getElementsByTagName("img")[0];
-  document.getElementById("popup-product-image").src = l.src;
-
-  // Seleciona a div 'popup-sizes' dentro do popup
-  var d = o.getElementsByClassName("popup-sizes")[0];
-
-  // Remove o título anterior, se houver
-  var existingTitle = o.querySelector('.popup-title');
-  if (existingTitle) {
-      existingTitle.parentNode.removeChild(existingTitle);
-  }
-
-  // Limpa os filhos existentes dentro de 'popup-sizes' antes de adicionar novos elementos
-  while (d.firstChild) {
-      d.removeChild(d.firstChild);
-  }
-
-  // Clonar e adicionar o 'popup-title' fora e antes da div 'popup-sizes'
-  var popupTitle = t.querySelector('.product-details > .popup-title');
-  if (popupTitle) {
-      var clonedTitle = popupTitle.cloneNode(true);
-      // Insere o título clonado antes da div 'popup-sizes' no contêiner pai
-      d.parentNode.insertBefore(clonedTitle, d);
-  }
-
-  // Clona e adiciona cada tamanho disponível para a cor selecionada no popup
-  var a = t.querySelectorAll('.sizes[data-color="' + n + '"] > .size');
-  for (var s = 0; s < a.length; s++) {
-      var p = a[s].cloneNode(true); // Clona o elemento 'size'
-      var c = p.querySelectorAll(".measure-container .measure"); // Seleciona todos os 'measure'
-
-      // Configura os botões de aumentar e diminuir quantidade para cada 'measure'
-      for (var m = 0; m < c.length; m++) {
-          var measureContainer = c[m].parentNode;
-
-          // Remove o input de quantidade existente
-          var existingInput = measureContainer.querySelector(".measure-quantity");
-          if (existingInput) {
-              measureContainer.removeChild(existingInput);
-          }
-
-          // Cria o contêiner para os controles (botões e input)
-          var controlsContainer = document.createElement("div");
-          controlsContainer.className = "controls";
-
-          // Cria e configura os botões de aumentar e diminuir e o input de quantidade
-          var decreaseButton = document.createElement("button");
-          decreaseButton.innerText = "-";
-          decreaseButton.className = "decrease-button";
-
-          var increaseButton = document.createElement("button");
-          increaseButton.innerText = "+";
-          increaseButton.className = "increase-button";
-
-          var quantityInput = document.createElement("input");
-          quantityInput.type = "number";
-          quantityInput.min = "0";
-          quantityInput.className = "measure-quantity";
-
-          // Adiciona os controles ao contêiner
-          controlsContainer.appendChild(decreaseButton);
-          controlsContainer.appendChild(quantityInput);
-          controlsContainer.appendChild(increaseButton);
-
-          // Adiciona o contêiner de controles ao 'measureContainer'
-          measureContainer.appendChild(controlsContainer);
-
-          // Adiciona eventos nos botões
-          decreaseButton.addEventListener("click", function(event) {
-              let inputElement = event.target.parentNode.querySelector(".measure-quantity");
-              let currentValue = parseInt(inputElement.value, 10);
-              if (isNaN(currentValue)) {
-                  currentValue = 0;
-              }
-              if (currentValue > 0) {
-                  inputElement.value = currentValue - 1;
-              }
-          });
-
-          increaseButton.addEventListener("click", function(event) {
-              let inputElement = event.target.parentNode.querySelector(".measure-quantity");
-              let currentValue = parseInt(inputElement.value, 10);
-              if (isNaN(currentValue)) {
-                  currentValue = 0;
-              }
-              inputElement.value = currentValue + 1;
-          });
-      }
-
-      // Adiciona o elemento 'size' clonado e configurado ao 'popup-sizes'
-      d.appendChild(p);
-  }
-
-  // Exibe o popup
-  o.style.display = "block";
+    var t = e.target.closest(".product"),
+        n = e.target.getAttribute("data-color"),
+        r = e.target.getAttribute("data-price"),
+        o = document.getElementById("popup");
+  
+    // Define o nome do produto e a cor/preço selecionados no popup
+    o.getElementsByClassName("popup-product-name")[0].innerText = t.getElementsByClassName("product-name")[0].innerText;
+    o.getElementsByClassName("popup-color")[0].innerText = n + ": € " + r;
+  
+    // Define a imagem do produto no popup
+    var l = t.getElementsByTagName("img")[0];
+    document.getElementById("popup-product-image").src = l.src;
+  
+    var d = o.getElementsByClassName("popup-sizes")[0];
+    
+    // Remove o título anterior, se houver
+    var existingTitle = o.querySelector('.popup-title');
+    if (existingTitle) {
+        existingTitle.remove();
+    }
+  
+    // Verifica se existe um título para os tamanhos e o adiciona ao popup
+    var sizeTitle = t.querySelector('.product-details > .popup-title');
+    if (sizeTitle) {
+        var clonedTitle = sizeTitle.cloneNode(true);
+        d.parentNode.insertBefore(clonedTitle, d);
+    }
+  
+    // Limpa os filhos existentes na div 'popup-sizes'
+    while (d.firstChild) {
+        d.removeChild(d.firstChild);
+    }
+  
+    // Clona e adiciona as opções de tamanho disponíveis para a cor selecionada
+    var a = t.querySelectorAll('.sizes[data-color="' + n + '"] > .size');
+    for (var s = 0; s < a.length; s++) {
+        var p = a[s].cloneNode(true),
+            c = p.querySelectorAll(".measure-container .measure");
+        
+        for (var m = 0; m < c.length; m++) {
+            var measureContainer = c[m].parentNode,
+                existingInput = measureContainer.querySelector(".measure-quantity");
+            
+            if (existingInput) {
+                measureContainer.removeChild(existingInput);
+            }
+            
+            var controlsContainer = document.createElement("div");
+            controlsContainer.className = "controls";
+            
+            var decreaseButton = document.createElement("button");
+            decreaseButton.innerText = "-";
+            decreaseButton.className = "decrease-button";
+            decreaseButton.addEventListener("click", function(event) {
+                var inputElement = event.target.parentNode.querySelector(".measure-quantity"),
+                    currentValue = parseInt(inputElement.value, 10) || 0;
+                if (currentValue > 0) {
+                    inputElement.value = currentValue - 1;
+                }
+            });
+            
+            var increaseButton = document.createElement("button");
+            increaseButton.innerText = "+";
+            increaseButton.className = "increase-button";
+            increaseButton.addEventListener("click", function(event) {
+                var inputElement = event.target.parentNode.querySelector(".measure-quantity"),
+                    currentValue = parseInt(inputElement.value, 10) || 0;
+                inputElement.value = currentValue + 1;
+            });
+            
+            var quantityInput = document.createElement("input");
+            quantityInput.type = "number";
+            quantityInput.min = "0";
+            quantityInput.className = "measure-quantity";
+            
+            controlsContainer.appendChild(decreaseButton);
+            controlsContainer.appendChild(quantityInput);
+            controlsContainer.appendChild(increaseButton);
+            
+            measureContainer.appendChild(controlsContainer);
+        }
+        
+        d.appendChild(p);
+    }
+  
+    // Exibe o popup
+    o.style.display = "block";
 }
+
 
 
   
@@ -140,106 +123,87 @@ function openPopup(e) {
       var totalValue = parseFloat(document.getElementById("total").innerText);
       var popup = document.getElementById("popup");
       var productName = popup.querySelector(".popup-product-name").innerText;
-      var color = popup.querySelector(".popup-color").innerText.split(":")[0].trim();
+      var color = popup.querySelector(".popup-color").innerText.split(": ")[0].trim();
       var productImage = popup.querySelector(".popup-product-image").src;
-      var measures = popup.querySelectorAll(".measure");
+      var measures = popup.querySelectorAll(".measure-container");
   
       // Inicialize cartItems como um array vazio
       let cartItems = JSON.parse(getItemWithExpiry("cart") || "[]");
   
-      for (var i = 0; i < measures.length; i++) {
-        var price = parseFloat(measures[i].getAttribute("data-price"));
-        // Ajustar a maneira de obter a quantidade
-        var quantityInput = measures[i].parentNode.querySelector(".measure-quantity");
-        var quantity = parseInt(quantityInput.value, 10);
+      measures.forEach(function(measureContainer) {
+          var measure = measureContainer.querySelector(".measure");
+          var price = parseFloat(measure.getAttribute("data-price"));
+          // Ajuste na maneira de obter a quantidade
+          var quantityInput = measureContainer.querySelector(".measure-quantity");
+          var quantity = parseInt(quantityInput.value, 10);
   
           if (quantity > 0) {
-              var sizeText = measures[i].innerText;
-              var sizeName = measures[i].closest(".size").querySelector("h4").innerText;
+              var sizeText = measure.textContent;
+              var sizeName = measure.closest(".size").querySelector("h4").textContent;
   
-              // Encontrar o índice do produto existente, se houver
-              var existingIndex = cartItems.findIndex(p => {
-                  var div = document.createElement('div');
-                  div.innerHTML = p;
-                  return div.firstChild.querySelector(".product-info").innerText.includes(productName + " " + color + " | " + sizeName + " " + sizeText);
-              });
+              // Constrói o texto de identificação do produto
+              var productIdentifier = productName + " " + color + " | " + sizeName + " " + sizeText;
   
-              if (existingIndex >= 0) {
-                  // Atualizar a quantidade e remover o item existente do array cartItems
-                  var div = document.createElement('div');
-                  div.innerHTML = cartItems[existingIndex];
-                  var existingQty = parseInt(div.firstChild.querySelector(".product-info > span").innerText.split("*")[1].split("unid")[0].trim());
-                  
-                  // Atualizar o totalValue de acordo com a quantidade anterior
-                  totalValue -= price * existingQty;
+              // Encontra se o produto já existe no carrinho
+              var existingProductIndex = cartItems.findIndex(item => item.productIdentifier === productIdentifier);
   
-                  quantity += existingQty;
-                  cartItems.splice(existingIndex, 1);
+              if (existingProductIndex >= 0) {
+                  // Se o produto já existe, atualiza a quantidade
+                  cartItems[existingProductIndex].quantity += quantity;
+              } else {
+                  // Se o produto é novo, adiciona ao array
+                  cartItems.push({
+                      productIdentifier,
+                      productName,
+                      color,
+                      sizeName,
+                      sizeText,
+                      price,
+                      quantity,
+                      productImage
+                  });
               }
   
-              // Atualizar o totalValue de acordo com a nova quantidade
-              totalValue += price * quantity;
-  
-              var productElement = document.createElement("p");
-              var imgElement = document.createElement("img");
-              imgElement.src = productImage;
-              productElement.appendChild(imgElement);
-  
-              var productInfo = document.createElement("span");
-              productInfo.className = "product-info";
-              productInfo.innerText = productName + " " + color + " | " + sizeName + " " + sizeText;
-              var productPrice = document.createElement("span");
-              productPrice.innerText = "€" + price.toFixed(2) + " * " + quantity + " unid = €" + (price * quantity).toFixed(2);
-              productInfo.appendChild(document.createElement("br"));
-              productInfo.appendChild(productPrice);
-              productElement.appendChild(productInfo);
-  
-              var removeButton = document.createElement("button");
-              removeButton.innerText = "X";
-              removeButton.addEventListener("click", removeFromCart);
-              productElement.appendChild(removeButton);
-  
-              // Adicionar o novo elemento ao array cartItems
-              cartItems.push(productElement.outerHTML);
-              
-              var cartButton = document.getElementById("cartButton");
-              cartButton.classList.add("yellow");
-          
-              // Remover a classe amarela após 2 segundos
-              setTimeout(() => {
-                  cartButton.classList.remove("yellow");
-              }, 1200); // 2 segundos
+              // Atualização visual que indica adição ao carrinho
+              var addedBanner = document.createElement("div");
+              addedBanner.textContent = "Adicionado!";
+              addedBanner.className = "added-banner"; // Certifique-se de que essa classe tem o estilo desejado
+              measureContainer.appendChild(addedBanner);
+              setTimeout(() => addedBanner.remove(), 2000); // Remove a indicação após 2 segundos
           }
-      }
+      });
   
-   // Atualize o localStorage e o carrinho no DOM
-   document.getElementById("total").innerText = totalValue.toFixed(2);
-   setItemWithExpiry("cart", JSON.stringify(cartItems));
-   
-   var cart = document.getElementById("cart");
-   cart.innerHTML = "";  // Limpa o carrinho para evitar duplicação de elementos
-   for (var i = 0; i < cartItems.length; i++) {
-       var div = document.createElement('div');
-       div.innerHTML = cartItems[i];
-       div.firstChild.querySelector("button").addEventListener("click", removeFromCart);
-       cart.appendChild(div.firstChild);
-   }
-      // Adicionando a mensagem "Adicionado"
-      var B = document.createElement("div");
-      B.style.position = "absolute";
-      B.style.top = "0";
-      B.style.left = "10px";
-      B.style.color = "white";
-      B.style.padding = "5px";
-      B.style.zIndex = "100";
-      B.className = "added-banner";
-      B.innerText = "Adicionado";
+      // Atualiza o valor total no carrinho
+      document.getElementById("total").innerText = totalValue.toFixed(2);
   
-      var h = document.querySelector(`img[src="${productImage}"]`).closest(".product");
-      h.style.position = "relative";
-      h.appendChild(B);
-   closePopup();
+      // Salva os itens no localStorage
+      setItemWithExpiry("cart", JSON.stringify(cartItems));
+  
+      // Atualiza o DOM do carrinho com os novos itens
+      updateCartDOM(cartItems);
+  
+      // Fecha o popup
+      closePopup();
   }
+  
+  function closePopup() {
+      document.getElementById("popup").style.display = "none";
+  }
+  
+  function updateCartDOM(cartItems) {
+      var cart = document.getElementById("cart");
+      cart.innerHTML = ""; // Limpa o carrinho para evitar duplicação de elementos
+      cartItems.forEach(item => {
+          var div = document.createElement('div');
+          // Aqui você pode construir o elemento do carrinho com os dados do item
+          // Por exemplo:
+          div.textContent = `${item.productName} - ${item.color} - ${item.sizeText} - Quantidade: ${item.quantity}`;
+          cart.appendChild(div);
+      });
+  }
+  
+  // Funções auxiliares setItemWithExpiry e getItemWithExpiry aqui
+  
   function addCloseButtonToCart(clone) {
       console.log('Adicionando botão de fechar ao carrinho'); // Log para identificar se a função é chamada
       if (!clone.querySelector('.close-cart-button')) {
