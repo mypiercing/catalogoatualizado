@@ -1,74 +1,76 @@
 function openPopup(e) {
-    var t = e.target.closest(".product"),
-        n = e.target.getAttribute("data-color"),
-        r = e.target.getAttribute("data-price"),
-        o = document.getElementById("popup");
-  
-    o.getElementsByClassName("popup-product-name")[0].innerText = t.getElementsByClassName("product-name")[0].innerText;
-    o.getElementsByClassName("popup-color")[0].innerText = n + ": € " + r;
-  
-    var l = t.getElementsByTagName("img")[0];
-    document.getElementById("popup-product-image").src = l.src;
-  // Dentro da função openPopup, antes de adicionar os sizes ao popup
-var popupTitle = t.querySelector('.product-details > .popup-title');
-if (popupTitle) {
-  var clonedTitle = popupTitle.cloneNode(true);
-  o.getElementsByClassName("popup-sizes")[0].prepend(clonedTitle); // Usar prepend para adicionar o título no início do popup-sizes
-}
-    var d = o.getElementsByClassName("popup-sizes")[0];
-    while (d.firstChild) {
-        d.removeChild(d.firstChild);
-    }
-  
-    // Clonar e adicionar o popup-title depois de limpar os filhos de popup-sizes
-    var popupTitle = t.querySelector('.product-details > .popup-title');
-    if (popupTitle) {
-        var clonedTitle = popupTitle.cloneNode(true);
-        d.prepend(clonedTitle); // Usa prepend para adicionar o título no início do popup-sizes
-    }
+  var t = e.target.closest(".product"),
+      n = e.target.getAttribute("data-color"),
+      r = e.target.getAttribute("data-price"),
+      o = document.getElementById("popup");
 
-  
-    var a = t.querySelectorAll('.sizes[data-color="' + n + '"] > .size');
-    for (var s = 0; s < a.length; s++) {
-      var p = a[s].cloneNode(true);
-      var c = p.querySelectorAll(".measure-container .measure");
-  
+  // Configura o nome do produto e cor/preço no popup
+  o.getElementsByClassName("popup-product-name")[0].innerText = t.getElementsByClassName("product-name")[0].innerText;
+  o.getElementsByClassName("popup-color")[0].innerText = n + ": € " + r;
+
+  // Configura a imagem do produto no popup
+  var l = t.getElementsByTagName("img")[0];
+  document.getElementById("popup-product-image").src = l.src;
+
+  // Seleciona a div 'popup-sizes' dentro do popup
+  var d = o.getElementsByClassName("popup-sizes")[0];
+
+  // Limpa os filhos existentes dentro de 'popup-sizes' antes de adicionar novos elementos
+  while (d.firstChild) {
+      d.removeChild(d.firstChild);
+  }
+
+  // Clonar e adicionar o 'popup-title' fora e antes da div 'popup-sizes'
+  var popupTitle = t.querySelector('.product-details > .popup-title');
+  if (popupTitle) {
+      var clonedTitle = popupTitle.cloneNode(true);
+      // Insere o título clonado antes da div 'popup-sizes' no contêiner pai
+      d.parentNode.insertBefore(clonedTitle, d);
+  }
+
+  // Clona e adiciona cada tamanho disponível para a cor selecionada no popup
+  var a = t.querySelectorAll('.sizes[data-color="' + n + '"] > .size');
+  for (var s = 0; s < a.length; s++) {
+      var p = a[s].cloneNode(true); // Clona o elemento 'size'
+      var c = p.querySelectorAll(".measure-container .measure"); // Seleciona todos os 'measure'
+
+      // Configura os botões de aumentar e diminuir quantidade para cada 'measure'
       for (var m = 0; m < c.length; m++) {
           var measureContainer = c[m].parentNode;
-  
-          // Encontre o input existente e remova-o
+
+          // Remove o input de quantidade existente
           var existingInput = measureContainer.querySelector(".measure-quantity");
           if (existingInput) {
               measureContainer.removeChild(existingInput);
           }
-  
-          // Criar o contêiner para os controles (botões e input)
+
+          // Cria o contêiner para os controles (botões e input)
           var controlsContainer = document.createElement("div");
           controlsContainer.className = "controls";
-  
-          // Criar e configurar os botões e o input
+
+          // Cria e configura os botões de aumentar e diminuir e o input de quantidade
           var decreaseButton = document.createElement("button");
           decreaseButton.innerText = "-";
           decreaseButton.className = "decrease-button";
-  
+
           var increaseButton = document.createElement("button");
           increaseButton.innerText = "+";
           increaseButton.className = "increase-button";
-  
+
           var quantityInput = document.createElement("input");
           quantityInput.type = "number";
           quantityInput.min = "0";
           quantityInput.className = "measure-quantity";
-  
-          // Adicionar os botões e o input ao contêiner de controles
+
+          // Adiciona os controles ao contêiner
           controlsContainer.appendChild(decreaseButton);
           controlsContainer.appendChild(quantityInput);
           controlsContainer.appendChild(increaseButton);
-  
-          // Adicionar o contêiner de controles ao measureContainer
+
+          // Adiciona o contêiner de controles ao 'measureContainer'
           measureContainer.appendChild(controlsContainer);
-  
-          // Eventos para os botões
+
+          // Adiciona eventos nos botões
           decreaseButton.addEventListener("click", function(event) {
               let inputElement = event.target.parentNode.querySelector(".measure-quantity");
               let currentValue = parseInt(inputElement.value, 10);
@@ -79,7 +81,7 @@ if (popupTitle) {
                   inputElement.value = currentValue - 1;
               }
           });
-  
+
           increaseButton.addEventListener("click", function(event) {
               let inputElement = event.target.parentNode.querySelector(".measure-quantity");
               let currentValue = parseInt(inputElement.value, 10);
@@ -89,12 +91,15 @@ if (popupTitle) {
               inputElement.value = currentValue + 1;
           });
       }
-  
+
+      // Adiciona o elemento 'size' clonado e configurado ao 'popup-sizes'
       d.appendChild(p);
-    }
-  
-    o.style.display = "block";
   }
+
+  // Exibe o popup
+  o.style.display = "block";
+}
+
   
   
     let freight = 21.0; // define o valor do frete
