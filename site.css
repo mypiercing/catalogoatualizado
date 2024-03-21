@@ -405,6 +405,9 @@ button.color {
     touch-action: manipulation;
     align-items: center;
 }
+.product-container .product .product-details .popup-title {
+display: none;
+}
 button.color-large {
         width: 95px;
         background-color: #444;
