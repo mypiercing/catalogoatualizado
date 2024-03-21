@@ -9,7 +9,12 @@ function openPopup(e) {
   
     var l = t.getElementsByTagName("img")[0];
     document.getElementById("popup-product-image").src = l.src;
-  
+  // Dentro da função openPopup, antes de adicionar os sizes ao popup
+var popupTitle = t.querySelector('.product-details > .popup-title');
+if (popupTitle) {
+  var clonedTitle = popupTitle.cloneNode(true);
+  o.getElementsByClassName("popup-sizes")[0].prepend(clonedTitle); // Usar prepend para adicionar o título no início do popup-sizes
+}
     var d = o.getElementsByClassName("popup-sizes")[0];
     while (d.firstChild) {
         d.removeChild(d.firstChild);
