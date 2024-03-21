@@ -15,6 +15,12 @@ function openPopup(e) {
   // Seleciona a div 'popup-sizes' dentro do popup
   var d = o.getElementsByClassName("popup-sizes")[0];
 
+  // Remove o título anterior, se houver
+  var existingTitle = o.querySelector('.popup-title');
+  if (existingTitle) {
+      existingTitle.parentNode.removeChild(existingTitle);
+  }
+
   // Limpa os filhos existentes dentro de 'popup-sizes' antes de adicionar novos elementos
   while (d.firstChild) {
       d.removeChild(d.firstChild);
@@ -99,6 +105,7 @@ function openPopup(e) {
   // Exibe o popup
   o.style.display = "block";
 }
+
 
   
   
