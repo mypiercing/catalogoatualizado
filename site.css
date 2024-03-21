@@ -990,7 +990,7 @@ flex-wrap: wrap;
         padding-right: 30px;
     }
     #popup .popup-sizes {
-        justify-content: center;
+        justify-content: space-between;
     }
     #popup-logo {
         width: 20%;
@@ -1324,7 +1324,7 @@ flex-wrap: wrap;
         padding-right: 30px;
     }
     #popup .popup-sizes {
-        justify-content: center;
+        justify-content: space-between;
     }
     #popup-logo {
         width: 20%;
