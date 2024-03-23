@@ -1070,6 +1070,7 @@ flex-wrap: wrap;
         font-size: 15px;
         margin-top: 5px;
         margin-bottom: 5px;
+        text-align: center;
     }
     #popup h2 {
         margin-top: 5px;
@@ -1402,6 +1403,7 @@ flex-wrap: wrap;
         font-size: 15px;
         margin-top: 5px;
         margin-bottom: 5px;
+        text-align: center;
     }
     #popup h2 {
         margin-top: 5px;
