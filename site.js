@@ -4,79 +4,37 @@ function openPopup(e) {
       r = e.target.getAttribute("data-price"),
       o = document.getElementById("popup");
 
-  // Configura o nome do produto e cor/preço no popup
   o.getElementsByClassName("popup-product-name")[0].innerText = t.getElementsByClassName("product-name")[0].innerText;
   o.getElementsByClassName("popup-color")[0].innerText = n + ": € " + r;
 
-  // Configura a imagem do produto no popup
   var l = t.getElementsByTagName("img")[0];
   document.getElementById("popup-product-image").src = l.src;
 
-  // Seleciona a div 'popup-sizes' dentro do popup
   var d = o.getElementsByClassName("popup-sizes")[0];
 
-  // Remove o título anterior, se houver
-  var existingTitle = o.querySelector('.popup-title');
-  if (existingTitle) {
-      existingTitle.parentNode.removeChild(existingTitle);
-  }
-
-  // Limpa os filhos existentes dentro de 'popup-sizes' antes de adicionar novos elementos
   while (d.firstChild) {
       d.removeChild(d.firstChild);
   }
 
-  // Clonar e adicionar o 'popup-title' fora e antes da div 'popup-sizes'
-  var popupTitle = t.querySelector('.product-details > .popup-title');
-  if (popupTitle) {
-      var clonedTitle = popupTitle.cloneNode(true);
-      // Insere o título clonado antes da div 'popup-sizes' no contêiner pai
-      d.parentNode.insertBefore(clonedTitle, d);
-  }
-
-  // Clona e adiciona cada tamanho disponível para a cor selecionada no popup
   var a = t.querySelectorAll('.sizes[data-color="' + n + '"] > .size');
   for (var s = 0; s < a.length; s++) {
-      var p = a[s].cloneNode(true); // Clona o elemento 'size'
-      var c = p.querySelectorAll(".measure-container .measure"); // Seleciona todos os 'measure'
+      var p = a[s].cloneNode(true);
+      var c = p.querySelectorAll(".measure-container .measure");
 
-      // Configura os botões de aumentar e diminuir quantidade para cada 'measure'
       for (var m = 0; m < c.length; m++) {
           var measureContainer = c[m].parentNode;
 
-          // Remove o input de quantidade existente
           var existingInput = measureContainer.querySelector(".measure-quantity");
           if (existingInput) {
               measureContainer.removeChild(existingInput);
           }
 
-          // Cria o contêiner para os controles (botões e input)
           var controlsContainer = document.createElement("div");
           controlsContainer.className = "controls";
 
-          // Cria e configura os botões de aumentar e diminuir e o input de quantidade
           var decreaseButton = document.createElement("button");
           decreaseButton.innerText = "-";
           decreaseButton.className = "decrease-button";
-
-          var increaseButton = document.createElement("button");
-          increaseButton.innerText = "+";
-          increaseButton.className = "increase-button";
-
-          var quantityInput = document.createElement("input");
-          quantityInput.type = "number";
-          quantityInput.min = "0";
-          quantityInput.className = "measure-quantity";
-
-          // Adiciona os controles ao contêiner
-          controlsContainer.appendChild(decreaseButton);
-          controlsContainer.appendChild(quantityInput);
-          controlsContainer.appendChild(increaseButton);
-
-          // Adiciona o contêiner de controles ao 'measureContainer'
-          measureContainer.appendChild(controlsContainer);
-
-          // Adiciona eventos nos botões
           decreaseButton.addEventListener("click", function(event) {
               let inputElement = event.target.parentNode.querySelector(".measure-quantity");
               let currentValue = parseInt(inputElement.value, 10);
@@ -88,6 +46,9 @@ function openPopup(e) {
               }
           });
 
+          var increaseButton = document.createElement("button");
+          increaseButton.innerText = "+";
+          increaseButton.className = "increase-button";
           increaseButton.addEventListener("click", function(event) {
               let inputElement = event.target.parentNode.querySelector(".measure-quantity");
               let currentValue = parseInt(inputElement.value, 10);
@@ -96,15 +57,33 @@ function openPopup(e) {
               }
               inputElement.value = currentValue + 1;
           });
+
+          var quantityInput = document.createElement("input");
+          quantityInput.type = "number";
+          quantityInput.min = "0";
+          quantityInput.className = "measure-quantity";
+
+          controlsContainer.appendChild(decreaseButton);
+          controlsContainer.appendChild(quantityInput);
+          controlsContainer.appendChild(increaseButton);
+
+          measureContainer.appendChild(controlsContainer);
       }
 
-      // Adiciona o elemento 'size' clonado e configurado ao 'popup-sizes'
       d.appendChild(p);
   }
 
-  // Exibe o popup
+  // Após adicionar todos os elementos .size, verifica a quantidade e ajusta o estilo de .popup-sizes
+  var sizeCount = d.getElementsByClassName("size").length;
+  if (sizeCount > 2) {
+      d.style.justifyContent = 'flex-start';
+  } else {
+      d.style.justifyContent = 'center';
+  }
+
   o.style.display = "block";
 }
+
 
 
   
