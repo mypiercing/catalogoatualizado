@@ -75,7 +75,7 @@ function openPopup(e) {
 
   // Após adicionar todos os elementos .size, verifica a quantidade e ajusta o estilo de .popup-sizes
   var sizeCount = d.getElementsByClassName("size").length;
-  if (sizeCount > 2) {
+  if (sizeCount > 3) {
       d.style.justifyContent = 'flex-start';
   } else {
       d.style.justifyContent = 'center';
