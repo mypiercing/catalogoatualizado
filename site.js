@@ -356,25 +356,28 @@ function getCartItemsText() {
       let productInfo = cartElements[i].querySelector(".product-info").innerText;
       // Encontramos a última linha que contém o cálculo do preço.
       let lastLineStart = productInfo.lastIndexOf("\n") + 1;
-      let productDetails = productInfo.substring(lastLineStart);
       let productText = productInfo.substring(0, lastLineStart);
+      let productPriceLine = productInfo.substring(lastLineStart);
 
       // Agora podemos separar a parte do preço para aplicar o efeito de negrito
-      let productPriceParts = productDetails.split("=");
-      let productPrice = productPriceParts[0] + "= *" + productPriceParts[1].trim() + "*";
+      let productPriceParts = productPriceLine.split("=");
 
-      // Insere a quebra de linha entre o título do produto e os detalhes (cor e medida)
-      let titleEndIndex = productText.lastIndexOf("|");
-      if (titleEndIndex !== -1) {
-          productText = productText.substring(0, titleEndIndex) + "\n" + productText.substring(titleEndIndex + 1);
-      }
+      // Adiciona um espaço entre o "=" e o "*" para a formatação do WhatsApp
+      let productPrice = productPriceParts[0] + "= *" + productPriceParts[1].trim() + "*";
 
       // Adiciona emoticons específicos após as palavras-chave
       productText = productText.replace("Natural", "Natural ⬜");
       productText = productText.replace("Gold", "Gold 🟨");
       productText = productText.replace("Black", "Black ⬛");
 
-      cartText += productText.trim() + productPrice + "\n~------------------------------~\n"; // Adiciona a linha divisória após cada produto
+      // Identifica e insere uma quebra de linha após o nome do produto para separar dos detalhes de cor e medida
+      // Isso assume que o formato do texto é "Nome do Produto Cor | Medida"
+      let parts = productText.split("|");
+      if (parts.length > 1) {
+          productText = parts[0].trim() + "\n" + parts.slice(1).join("|").trim();
+      }
+
+      cartText += productText + productPrice + "\n~---------------~\n"; // Adiciona a linha divisória após cada produto
   }
 
   return cartText.trim(); // Use .trim() para remover espaços extras no final, se houver
