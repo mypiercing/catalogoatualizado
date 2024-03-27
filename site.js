@@ -354,30 +354,28 @@ function getCartItemsText() {
   var cartText = "";
   for (var i = 0; i < cartElements.length; i++) {
       let productInfo = cartElements[i].querySelector(".product-info").innerText;
+      // Encontramos a última linha que contém o cálculo do preço.
       let lastLineStart = productInfo.lastIndexOf("\n") + 1;
       let productText = productInfo.substring(0, lastLineStart);
       let productPriceLine = productInfo.substring(lastLineStart);
+      // Agora podemos separar a parte do preço para aplicar o efeito de negrito
       let productPriceParts = productPriceLine.split("=");
-
+      // Adiciona um espaço entre o "=" e o "*" para a formatação do WhatsApp
       let productPrice = productPriceParts[0] + "= *" + productPriceParts[1].trim() + "*";
 
+      // Adiciona emoticons específicos após as palavras-chave
       productText = productText.replace("Natural", "Natural ⬜");
       productText = productText.replace("Gold", "Gold 🟨");
       productText = productText.replace("Black", "Black ⬛");
 
-      cartText += productText + productPrice + "\n~---------------~\n";
-  }
-  // Remove the last line separator if you want to add more text after the items list
-  if (cartElements.length > 0) {
-      cartText = cartText.trimEnd();
-      cartText = cartText.substring(0, cartText.lastIndexOf("\n~---------------~\n"));
+      cartText += productText + productPrice;
+      // Verifica se não é o último produto para adicionar a linha divisória
+      if (i < cartElements.length - 1) {
+          cartText += "\n~------------------------------~\n";
+      }
   }
   return cartText;
 }
-
-
-
-
   
     document.getElementById("popup-close").addEventListener("click", closePopup);
     document.getElementById("whatsappButton").addEventListener("click", function () {
