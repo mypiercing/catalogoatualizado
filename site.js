@@ -16,7 +16,6 @@ function openPopup(e) {
     d.removeChild(d.firstChild);
   }
 
-  var popupHeader = o.querySelector('.popup-header');
   var productPopupTitleElement = t.querySelector(".popup-title");
   var existingPopupTitle = o.querySelector(".popup-title");
   if (productPopupTitleElement) {
@@ -26,6 +25,7 @@ function openPopup(e) {
     }
     existingPopupTitle.innerText = productPopupTitleElement.innerText;
 
+    var popupHeader = o.querySelector('.popup-header');
     if (popupHeader) {
       popupHeader.parentNode.insertBefore(existingPopupTitle, popupHeader.nextSibling);
     } else {
@@ -37,11 +37,10 @@ function openPopup(e) {
   for (var s = 0; s < a.length; s++) {
     var p = a[s].cloneNode(true);
 
-    // Verifica e adiciona o <h4 class="detail">
-    var detailElements = t.querySelectorAll('.size .detail');
-    if (detailElements.length > 0 && s < detailElements.length) {
-      var detailElement = detailElements[s].cloneNode(true);
-      p.insertBefore(detailElement, p.firstChild);
+    // Remove duplicated <h4 class="detail"> if exists
+    var detailElements = p.getElementsByClassName("detail");
+    while(detailElements.length > 1) {
+      detailElements[1].parentNode.removeChild(detailElements[1]);
     }
 
     var c = p.querySelectorAll(".measure-container .measure");
@@ -105,6 +104,7 @@ function openPopup(e) {
 
   o.style.display = "block";
 }
+
 
 
 
