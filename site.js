@@ -364,9 +364,9 @@ function getCartItemsText() {
       let productPrice = productPriceParts[0] + "= *" + productPriceParts[1].trim() + "*";
 
       // Adiciona emoticons específicos após as palavras-chave
-      productText = productText.replace("Natural", "\nNatural ⬜");
-      productText = productText.replace("Gold", "\nGold 🟨");
-      productText = productText.replace("Black", "\nBlack ⬛");
+      productText = productText.replace("Natural", "Natural ⬜");
+      productText = productText.replace("Gold", "Gold 🟨");
+      productText = productText.replace("Black", "Black ⬛");
 
       cartText += productText + productPrice + "\n~--------------------------------------~\n"; // Adiciona a linha divisória após cada produto
     }
@@ -382,7 +382,7 @@ function getCartItemsText() {
       var totalText = "*Total: €" + document.getElementById("total").innerText + "*";
       var freightText = "Frete: *€" + freight.toFixed(2) + "*"; // Assuming "freight" is a global variable
       var message = encodeURIComponent("*Resumo da Compra:*\n\n" + cartText + freightText + "\n\n" + totalText);
-      window.open(`https://wa.me/393898986018?text=${message}`);
+      window.open(`https://wa.me/5511989174080?text=${message}`);
     });
   document.getElementById("copyButton").addEventListener("click", function () {
       var cartText = getCartItemsText();
