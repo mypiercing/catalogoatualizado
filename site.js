@@ -16,24 +16,28 @@ function openPopup(e) {
     d.removeChild(d.firstChild);
   }
 
-  // Encontrar o elemento .popup-text para inserir o título após ele
-  var popupText = o.querySelector('.popup-text');
+// Encontrar o elemento .popup-header para inserir o título após ele
+var popupHeader = o.querySelector('.popup-header');
 
-  // Buscar e criar (se necessário) o h4 class="popup-title"
-  var productPopupTitleElement = t.querySelector(".popup-title");
-  var existingPopupTitle = o.querySelector(".popup-title");
-  if (productPopupTitleElement) {
-    if (!existingPopupTitle) {
-      existingPopupTitle = document.createElement("h4");
-      existingPopupTitle.className = "popup-title";
-    }
-    existingPopupTitle.innerText = productPopupTitleElement.innerText;
-
-    // Inserir o título logo após o .popup-text
-    if (popupText) {
-      popupText.parentNode.insertBefore(existingPopupTitle, popupText.nextSibling);
-    }
+// Buscar e criar (se necessário) o h4 class="popup-title"
+var productPopupTitleElement = t.querySelector(".popup-title");
+var existingPopupTitle = o.querySelector(".popup-title");
+if (productPopupTitleElement) {
+  if (!existingPopupTitle) {
+    existingPopupTitle = document.createElement("h4");
+    existingPopupTitle.className = "popup-title";
   }
+  existingPopupTitle.innerText = productPopupTitleElement.innerText;
+
+  // Inserir o título logo após o .popup-header
+  if (popupHeader) {
+    popupHeader.parentNode.insertBefore(existingPopupTitle, popupHeader.nextSibling);
+  } else {
+    // Caso o .popup-header não seja encontrado, insere o título no início do popup
+    o.insertBefore(existingPopupTitle, o.firstChild);
+  }
+}
+
 
   var a = t.querySelectorAll('.sizes[data-color="' + n + '"] > .size');
   for (var s = 0; s < a.length; s++) {
