@@ -365,12 +365,12 @@ function getCartItemsText() {
       productText = productText.replace("Gold", "Gold 🟨");
       productText = productText.replace("Black", "Black ⬛");
 
-      cartText += productText + productPrice + "\n~---------------~\n";
+      cartText += productText + productPrice + "\n~-                      -~\n";
   }
   // Remove the last line separator if you want to add more text after the items list
   if (cartElements.length > 0) {
       cartText = cartText.trimEnd();
-      cartText = cartText.substring(0, cartText.lastIndexOf("\n~---------------~\n"));
+      cartText = cartText.substring(0, cartText.lastIndexOf("\n~-                      -~\n"));
   }
   return cartText;
 }
