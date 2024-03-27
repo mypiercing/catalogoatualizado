@@ -1693,3 +1693,7 @@ button.colorthree[data-color="Natural"] {
 .special {
 justify-content: space-between!important;
 }
+
+.popup-title {
+    text-align: center;
+}
