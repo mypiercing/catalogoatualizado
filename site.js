@@ -362,6 +362,12 @@ function getCartItemsText() {
       let productPriceParts = productPriceLine.split("=");
       // Adiciona um espaço entre o "=" e o "*" para a formatação do WhatsApp
       let productPrice = productPriceParts[0] + "= *" + productPriceParts[1].trim() + "*";
+
+      // Adiciona emoticons específicos após as palavras-chave
+      productText = productText.replace("Natural", "Natural ⬜");
+      productText = productText.replace("Gold", "Gold 🟨");
+      productText = productText.replace("Black", "Black ⬛");
+
       cartText += productText + productPrice;
       // Verifica se não é o último produto para adicionar a linha divisória
       if (i < cartElements.length - 1) {
@@ -370,6 +376,7 @@ function getCartItemsText() {
   }
   return cartText;
 }
+
 
 
   
