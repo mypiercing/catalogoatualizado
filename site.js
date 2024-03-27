@@ -364,9 +364,9 @@ function getCartItemsText() {
       let productPrice = productPriceParts[0] + "= *" + productPriceParts[1].trim() + "*";
 
       // Adiciona emoticons específicos após as palavras-chave
-      productText = productText.replace("Natural", "Natural ⬜");
-      productText = productText.replace("Gold", "Gold 🟨");
-      productText = productText.replace("Black", "Black ⬛");
+      productText = productText.replace("Natural", "\nNatural ⬜");
+      productText = productText.replace("Gold", "\nGold 🟨");
+      productText = productText.replace("Black", "\nBlack ⬛");
 
       cartText += productText + productPrice + "\n~--------------------------------------~\n"; // Adiciona a linha divisória após cada produto
     }
