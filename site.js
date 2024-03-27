@@ -13,76 +13,89 @@ function openPopup(e) {
   var d = o.getElementsByClassName("popup-sizes")[0];
 
   while (d.firstChild) {
-      d.removeChild(d.firstChild);
+    d.removeChild(d.firstChild);
+  }
+
+  var productPopupTitleElement = t.querySelector(".popup-title");
+  if (productPopupTitleElement) {
+    var existingPopupTitle = o.querySelector(".popup-title");
+    if (!existingPopupTitle) {
+      existingPopupTitle = document.createElement("h4");
+      existingPopupTitle.className = "popup-title";
+      var measureHeader = o.querySelector('h2'); // Assume there is an <h2> element for "Selecione as medidas:"
+      if (measureHeader) {
+        measureHeader.parentNode.insertBefore(existingPopupTitle, measureHeader.nextSibling);
+      }
+    }
+    existingPopupTitle.innerText = productPopupTitleElement.innerText;
   }
 
   var a = t.querySelectorAll('.sizes[data-color="' + n + '"] > .size');
   for (var s = 0; s < a.length; s++) {
-      var p = a[s].cloneNode(true);
-      var c = p.querySelectorAll(".measure-container .measure");
+    var p = a[s].cloneNode(true);
+    var c = p.querySelectorAll(".measure-container .measure");
 
-      for (var m = 0; m < c.length; m++) {
-          var measureContainer = c[m].parentNode;
-
-          var existingInput = measureContainer.querySelector(".measure-quantity");
-          if (existingInput) {
-              measureContainer.removeChild(existingInput);
-          }
-
-          var controlsContainer = document.createElement("div");
-          controlsContainer.className = "controls";
-
-          var decreaseButton = document.createElement("button");
-          decreaseButton.innerText = "-";
-          decreaseButton.className = "decrease-button";
-          decreaseButton.addEventListener("click", function(event) {
-              let inputElement = event.target.parentNode.querySelector(".measure-quantity");
-              let currentValue = parseInt(inputElement.value, 10);
-              if (isNaN(currentValue)) {
-                  currentValue = 0;
-              }
-              if (currentValue > 0) {
-                  inputElement.value = currentValue - 1;
-              }
-          });
-
-          var increaseButton = document.createElement("button");
-          increaseButton.innerText = "+";
-          increaseButton.className = "increase-button";
-          increaseButton.addEventListener("click", function(event) {
-              let inputElement = event.target.parentNode.querySelector(".measure-quantity");
-              let currentValue = parseInt(inputElement.value, 10);
-              if (isNaN(currentValue)) {
-                  currentValue = 0;
-              }
-              inputElement.value = currentValue + 1;
-          });
-
-          var quantityInput = document.createElement("input");
-          quantityInput.type = "number";
-          quantityInput.min = "0";
-          quantityInput.className = "measure-quantity";
-
-          controlsContainer.appendChild(decreaseButton);
-          controlsContainer.appendChild(quantityInput);
-          controlsContainer.appendChild(increaseButton);
-
-          measureContainer.appendChild(controlsContainer);
+    for (var m = 0; m < c.length; m++) {
+      var measureContainer = c[m].parentNode;
+      var existingInput = measureContainer.querySelector(".measure-quantity");
+      if (existingInput) {
+        measureContainer.removeChild(existingInput);
       }
 
-      d.appendChild(p);
+      var controlsContainer = document.createElement("div");
+      controlsContainer.className = "controls";
+
+      var decreaseButton = document.createElement("button");
+      decreaseButton.innerText = "-";
+      decreaseButton.className = "decrease-button";
+      decreaseButton.addEventListener("click", function(event) {
+        let inputElement = event.target.parentNode.querySelector(".measure-quantity");
+        let currentValue = parseInt(inputElement.value, 10);
+        if (isNaN(currentValue)) {
+          currentValue = 0;
+        }
+        if (currentValue > 0) {
+          inputElement.value = currentValue - 1;
+        }
+      });
+
+      var increaseButton = document.createElement("button");
+      increaseButton.innerText = "+";
+      increaseButton.className = "increase-button";
+      increaseButton.addEventListener("click", function(event) {
+        let inputElement = event.target.parentNode.querySelector(".measure-quantity");
+        let currentValue = parseInt(inputElement.value, 10);
+        if (isNaN(currentValue)) {
+          currentValue = 0;
+        }
+        inputElement.value = currentValue + 1;
+      });
+
+      var quantityInput = document.createElement("input");
+      quantityInput.type = "number";
+      quantityInput.min = "0";
+      quantityInput.className = "measure-quantity";
+
+      controlsContainer.appendChild(decreaseButton);
+      controlsContainer.appendChild(quantityInput);
+      controlsContainer.appendChild(increaseButton);
+
+      measureContainer.appendChild(controlsContainer);
+    }
+
+    d.appendChild(p);
   }
 
-  // Após adicionar todos os elementos .size, verifica a quantidade e ajusta o estilo de .popup-sizes
   var sizeCount = d.getElementsByClassName("size").length;
   if (sizeCount > 3) {
-      d.style.justifyContent = 'flex-start';
+    d.style.justifyContent = 'flex-start';
   } else {
-      d.style.justifyContent = 'center';
+    d.style.justifyContent = 'center';
   }
 
   o.style.display = "block";
 }
+
 
 
 
