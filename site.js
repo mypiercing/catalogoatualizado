@@ -104,14 +104,7 @@ function openPopup(e) {
 
   o.style.display = "block";
 }
-
-
-
-
-
-
-
-  
+ 
   
     let freight = 21.0; // define o valor do frete
     let selectedSize = null,
@@ -147,87 +140,89 @@ function openPopup(e) {
       var color = popup.querySelector(".popup-color").innerText.split(":")[0].trim();
       var productImage = popup.querySelector(".popup-product-image").src;
       var measures = popup.querySelectorAll(".measure");
-  
+    
       // Inicialize cartItems como um array vazio
       let cartItems = JSON.parse(getItemWithExpiry("cart") || "[]");
-  
+    
       for (var i = 0; i < measures.length; i++) {
         var price = parseFloat(measures[i].getAttribute("data-price"));
         // Ajustar a maneira de obter a quantidade
         var quantityInput = measures[i].parentNode.querySelector(".measure-quantity");
         var quantity = parseInt(quantityInput.value, 10);
-  
-          if (quantity > 0) {
-              var sizeText = measures[i].innerText;
-              var sizeName = measures[i].closest(".size").querySelector("h4").innerText;
-  
-              // Encontrar o índice do produto existente, se houver
-              var existingIndex = cartItems.findIndex(p => {
-                  var div = document.createElement('div');
-                  div.innerHTML = p;
-                  return div.firstChild.querySelector(".product-info").innerText.includes(productName + " " + color + " | " + sizeName + " " + sizeText);
-              });
-  
-              if (existingIndex >= 0) {
-                  // Atualizar a quantidade e remover o item existente do array cartItems
-                  var div = document.createElement('div');
-                  div.innerHTML = cartItems[existingIndex];
-                  var existingQty = parseInt(div.firstChild.querySelector(".product-info > span").innerText.split("*")[1].split("unid")[0].trim());
-                  
-                  // Atualizar o totalValue de acordo com a quantidade anterior
-                  totalValue -= price * existingQty;
-  
-                  quantity += existingQty;
-                  cartItems.splice(existingIndex, 1);
-              }
-  
-              // Atualizar o totalValue de acordo com a nova quantidade
-              totalValue += price * quantity;
-  
-              var productElement = document.createElement("p");
-              var imgElement = document.createElement("img");
-              imgElement.src = productImage;
-              productElement.appendChild(imgElement);
-  
-              var productInfo = document.createElement("span");
-              productInfo.className = "product-info";
-              productInfo.innerText = productName + " " + color + " | " + sizeName + " " + sizeText;
-              var productPrice = document.createElement("span");
-              productPrice.innerText = "€" + price.toFixed(2) + " * " + quantity + " unid = €" + (price * quantity).toFixed(2);
-              productInfo.appendChild(document.createElement("br"));
-              productInfo.appendChild(productPrice);
-              productElement.appendChild(productInfo);
-  
-              var removeButton = document.createElement("button");
-              removeButton.innerText = "X";
-              removeButton.addEventListener("click", removeFromCart);
-              productElement.appendChild(removeButton);
-  
-              // Adicionar o novo elemento ao array cartItems
-              cartItems.push(productElement.outerHTML);
-              
-              var cartButton = document.getElementById("cartButton");
-              cartButton.classList.add("yellow");
-          
-              // Remover a classe amarela após 2 segundos
-              setTimeout(() => {
-                  cartButton.classList.remove("yellow");
-              }, 1200); // 2 segundos
-          }
+    
+        if (quantity > 0) {
+            var sizeText = measures[i].innerText;
+            // Ajuste para garantir que o nome do tamanho venha do <h4> correto (sem a classe "detail")
+            var sizeContainers = measures[i].closest(".size").querySelectorAll("h4");
+            var sizeName = sizeContainers.length > 1 ? sizeContainers[1].innerText : sizeContainers[0].innerText;
+    
+            // Encontrar o índice do produto existente, se houver
+            var existingIndex = cartItems.findIndex(p => {
+                var div = document.createElement('div');
+                div.innerHTML = p;
+                return div.firstChild.querySelector(".product-info").innerText.includes(productName + " " + color + " | " + sizeName + " " + sizeText);
+            });
+    
+            if (existingIndex >= 0) {
+                // Atualizar a quantidade e remover o item existente do array cartItems
+                var div = document.createElement('div');
+                div.innerHTML = cartItems[existingIndex];
+                var existingQty = parseInt(div.firstChild.querySelector(".product-info > span").innerText.split("*")[1].split("unid")[0].trim());
+                
+                // Atualizar o totalValue de acordo com a quantidade anterior
+                totalValue -= price * existingQty;
+    
+                quantity += existingQty;
+                cartItems.splice(existingIndex, 1);
+            }
+    
+            // Atualizar o totalValue de acordo com a nova quantidade
+            totalValue += price * quantity;
+    
+            var productElement = document.createElement("p");
+            var imgElement = document.createElement("img");
+            imgElement.src = productImage;
+            productElement.appendChild(imgElement);
+    
+            var productInfo = document.createElement("span");
+            productInfo.className = "product-info";
+            productInfo.innerText = productName + " " + color + " | " + sizeName + " " + sizeText;
+            var productPrice = document.createElement("span");
+            productPrice.innerText = "€" + price.toFixed(2) + " * " + quantity + " unid = €" + (price * quantity).toFixed(2);
+            productInfo.appendChild(document.createElement("br"));
+            productInfo.appendChild(productPrice);
+            productElement.appendChild(productInfo);
+    
+            var removeButton = document.createElement("button");
+            removeButton.innerText = "X";
+            removeButton.addEventListener("click", removeFromCart);
+            productElement.appendChild(removeButton);
+    
+            // Adicionar o novo elemento ao array cartItems
+            cartItems.push(productElement.outerHTML);
+            
+            var cartButton = document.getElementById("cartButton");
+            cartButton.classList.add("yellow");
+        
+            // Remover a classe amarela após 2 segundos
+            setTimeout(() => {
+                cartButton.classList.remove("yellow");
+            }, 1200); // 2 segundos
+        }
       }
-  
-   // Atualize o localStorage e o carrinho no DOM
-   document.getElementById("total").innerText = totalValue.toFixed(2);
-   setItemWithExpiry("cart", JSON.stringify(cartItems));
-   
-   var cart = document.getElementById("cart");
-   cart.innerHTML = "";  // Limpa o carrinho para evitar duplicação de elementos
-   for (var i = 0; i < cartItems.length; i++) {
-       var div = document.createElement('div');
-       div.innerHTML = cartItems[i];
-       div.firstChild.querySelector("button").addEventListener("click", removeFromCart);
-       cart.appendChild(div.firstChild);
-   }
+    
+      // Atualize o localStorage e o carrinho no DOM
+      document.getElementById("total").innerText = totalValue.toFixed(2);
+      setItemWithExpiry("cart", JSON.stringify(cartItems));
+      
+      var cart = document.getElementById("cart");
+      cart.innerHTML = "";  // Limpa o carrinho para evitar duplicação de elementos
+      for (var i = 0; i < cartItems.length; i++) {
+          var div = document.createElement('div');
+          div.innerHTML = cartItems[i];
+          div.firstChild.querySelector("button").addEventListener("click", removeFromCart);
+          cart.appendChild(div.firstChild);
+      }
       // Adicionando a mensagem "Adicionado"
       var B = document.createElement("div");
       B.style.position = "absolute";
@@ -238,12 +233,13 @@ function openPopup(e) {
       B.style.zIndex = "100";
       B.className = "added-banner";
       B.innerText = "Adicionado";
-  
+    
       var h = document.querySelector(`img[src="${productImage}"]`).closest(".product");
       h.style.position = "relative";
       h.appendChild(B);
-   closePopup();
-  }
+      closePopup();
+    }
+    
   function addCloseButtonToCart(clone) {
       console.log('Adicionando botão de fechar ao carrinho'); // Log para identificar se a função é chamada
       if (!clone.querySelector('.close-cart-button')) {
