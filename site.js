@@ -16,18 +16,23 @@ function openPopup(e) {
     d.removeChild(d.firstChild);
   }
 
+  // Encontrar o elemento .popup-text para inserir o título após ele
+  var popupText = o.querySelector('.popup-text');
+
+  // Buscar e criar (se necessário) o h4 class="popup-title"
   var productPopupTitleElement = t.querySelector(".popup-title");
+  var existingPopupTitle = o.querySelector(".popup-title");
   if (productPopupTitleElement) {
-    var existingPopupTitle = o.querySelector(".popup-title");
     if (!existingPopupTitle) {
       existingPopupTitle = document.createElement("h4");
       existingPopupTitle.className = "popup-title";
-      var measureHeader = o.querySelector('h2'); // Assume there is an <h2> element for "Selecione as medidas:"
-      if (measureHeader) {
-        measureHeader.parentNode.insertBefore(existingPopupTitle, measureHeader.nextSibling);
-      }
     }
     existingPopupTitle.innerText = productPopupTitleElement.innerText;
+
+    // Inserir o título logo após o .popup-text
+    if (popupText) {
+      popupText.parentNode.insertBefore(existingPopupTitle, popupText.nextSibling);
+    }
   }
 
   var a = t.querySelectorAll('.sizes[data-color="' + n + '"] > .size');
@@ -95,6 +100,7 @@ function openPopup(e) {
 
   o.style.display = "block";
 }
+
 
 
 
