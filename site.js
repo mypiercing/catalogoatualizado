@@ -368,12 +368,8 @@ function getCartItemsText() {
       productText = productText.replace("Gold", "Gold 🟨");
       productText = productText.replace("Black", "Black ⬛");
 
-      cartText += productText + productPrice;
-      // Verifica se não é o último produto para adicionar a linha divisória
-      if (i < cartElements.length - 1) {
-          cartText += "\n~------------------------------~\n";
-      }
-  }
+      cartText += productText + productPrice + "\n~---------------~\n"; // Adiciona a linha divisória após cada produto
+    }
   return cartText;
 }
   
