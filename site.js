@@ -374,7 +374,7 @@ function getCartItemsText() {
       productText = productText.replace("Gold", "Gold 🟨");
       productText = productText.replace("Black", "Black ⬛");
 
-      cartText += productText.trim() + productPrice + "\n~---------------~\n"; // Adiciona a linha divisória após cada produto
+      cartText += productText.trim() + productPrice + "\n~------------------------------~\n"; // Adiciona a linha divisória após cada produto
   }
 
   return cartText.trim(); // Use .trim() para remover espaços extras no final, se houver
