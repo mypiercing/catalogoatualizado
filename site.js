@@ -354,18 +354,23 @@ function getCartItemsText() {
   var cartText = "";
   for (var i = 0; i < cartElements.length; i++) {
       let productInfo = cartElements[i].querySelector(".product-info").innerText;
-      // We find the last line which contains the price calculation.
+      // Encontramos a última linha que contém o cálculo do preço.
       let lastLineStart = productInfo.lastIndexOf("\n") + 1;
       let productText = productInfo.substring(0, lastLineStart);
       let productPriceLine = productInfo.substring(lastLineStart);
-      // Now we can separate the price part to apply the bold effect
+      // Agora podemos separar a parte do preço para aplicar o efeito de negrito
       let productPriceParts = productPriceLine.split("=");
-      // Add a space between the "=" and the "*" for WhatsApp formatting
+      // Adiciona um espaço entre o "=" e o "*" para a formatação do WhatsApp
       let productPrice = productPriceParts[0] + "= *" + productPriceParts[1].trim() + "*";
-      cartText += productText + productPrice + "\n\n";
+      cartText += productText + productPrice;
+      // Verifica se não é o último produto para adicionar a linha divisória
+      if (i < cartElements.length - 1) {
+          cartText += "\n~---------------~\n";
+      }
   }
   return cartText;
 }
+
 
   
     document.getElementById("popup-close").addEventListener("click", closePopup);
