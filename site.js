@@ -16,34 +16,35 @@ function openPopup(e) {
     d.removeChild(d.firstChild);
   }
 
-// Encontrar o elemento .popup-header para inserir o título após ele
-var popupHeader = o.querySelector('.popup-header');
+  var popupHeader = o.querySelector('.popup-header');
+  var productPopupTitleElement = t.querySelector(".popup-title");
+  var existingPopupTitle = o.querySelector(".popup-title");
+  if (productPopupTitleElement) {
+    if (!existingPopupTitle) {
+      existingPopupTitle = document.createElement("h4");
+      existingPopupTitle.className = "popup-title";
+    }
+    existingPopupTitle.innerText = productPopupTitleElement.innerText;
 
-// Buscar e criar (se necessário) o h4 class="popup-title"
-var productPopupTitleElement = t.querySelector(".popup-title");
-var existingPopupTitle = o.querySelector(".popup-title");
-if (productPopupTitleElement) {
-  if (!existingPopupTitle) {
-    existingPopupTitle = document.createElement("h4");
-    existingPopupTitle.className = "popup-title";
+    if (popupHeader) {
+      popupHeader.parentNode.insertBefore(existingPopupTitle, popupHeader.nextSibling);
+    } else {
+      o.insertBefore(existingPopupTitle, o.firstChild);
+    }
   }
-  existingPopupTitle.innerText = productPopupTitleElement.innerText;
-
-  // Inserir o título logo após o .popup-header
-  if (popupHeader) {
-    popupHeader.parentNode.insertBefore(existingPopupTitle, popupHeader.nextSibling);
-  } else {
-    // Caso o .popup-header não seja encontrado, insere o título no início do popup
-    o.insertBefore(existingPopupTitle, o.firstChild);
-  }
-}
-
 
   var a = t.querySelectorAll('.sizes[data-color="' + n + '"] > .size');
   for (var s = 0; s < a.length; s++) {
     var p = a[s].cloneNode(true);
-    var c = p.querySelectorAll(".measure-container .measure");
 
+    // Verifica e adiciona o <h4 class="detail">
+    var detailElements = t.querySelectorAll('.size .detail');
+    if (detailElements.length > 0 && s < detailElements.length) {
+      var detailElement = detailElements[s].cloneNode(true);
+      p.insertBefore(detailElement, p.firstChild);
+    }
+
+    var c = p.querySelectorAll(".measure-container .measure");
     for (var m = 0; m < c.length; m++) {
       var measureContainer = c[m].parentNode;
       var existingInput = measureContainer.querySelector(".measure-quantity");
@@ -104,6 +105,7 @@ if (productPopupTitleElement) {
 
   o.style.display = "block";
 }
+
 
 
 
